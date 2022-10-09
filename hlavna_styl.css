@@ -1,0 +1,36 @@
+.navbar {
+    background: rgba(97,106,142,0.84);
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+}
+.logo {
+    font-family: "Gill Sans Nova Cond";
+    font-size-adjust: initial;
+}
+.logo-header-wrapper{
+    position: absolute;
+    left: 50%;
+}
+.logo-header {
+    align-self: center;
+    transform: translate(-50%,0);
+}
+.middle {
+    position:absolute;
+    left:50%;
+    transform:translate(-50%,-1850%);
+    text-align: center;
+    color: white;
+}
+.middle-text-style {
+
+}
+.container-text{
+    position: relative;
+    text-align:center!important;
+    color: white;
+}
+.adresa{
+    font-family: Arial;
+}
