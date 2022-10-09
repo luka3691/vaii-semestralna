@@ -6,8 +6,11 @@
     z-index: 1;
 }
 .logo {
-    font-family: "Gill Sans Nova Cond" ;
-    font-size-adjust: initial;
+    font-family: Gill Sans Nova Cond ;
+    font-size: x-large;
+    color: white;
+
+
 }
 .logo-header-wrapper{
     position: absolute;
@@ -24,6 +27,7 @@
     text-align: center;
     color: white;
     transform: translate(-50%,0);
+    font-size: xxx-large;
 }
 .middle-text-style {
 
