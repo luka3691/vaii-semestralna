@@ -5,11 +5,16 @@
     overflow: hidden;
     z-index: 1;
 }
+.btn-primary{
+    background-color: cadetblue!important;
+    border: cadetblue!important;
+}
 .logo {
-    font-family: Gill Sans Nova Cond ;
-    font-size: x-large;
-    color: white;
+    font-family: Gill Sans Nova Cond, inherit;
+    font-style: normal;
 
+    font-size: x-large;
+    color: white
 
 }
 .logo-header-wrapper{
@@ -19,6 +24,9 @@
 .logo-header {
     align-self: center;
     transform: translate(-50%,0);
+}
+.logo:hover{
+    color: white;
 }
 .middle {
     position:absolute;
@@ -44,5 +52,8 @@
     height: 100%;
 }
 .adresa{
-    font-family: Arial;
+    font-family: Arial, inherit;
+}
+.nav-link:hover{
+    color: silver;
 }
