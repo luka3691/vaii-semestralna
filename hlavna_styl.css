@@ -6,7 +6,7 @@
     z-index: 1;
 }
 .logo {
-    font-family: Gill Sans Nova Cond, Arial, sans-serif;
+    font-family: Gill Sans Nova Cond, monospace;
     font-style: normal;
     font-size: x-large;
     color: white
@@ -48,7 +48,7 @@
     height: 100%;
 }
 .adresa{
-    font-family: Arial, Arial, sans-serif;
+    font-family: Arial, monospace;
 }
 .nav-link:hover{
     color: silver;
