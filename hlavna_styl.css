@@ -5,14 +5,9 @@
     overflow: hidden;
     z-index: 1;
 }
-.btn-primary{
-    background-color: cadetblue!important;
-    border: cadetblue!important;
-}
 .logo {
-    font-family: Gill Sans Nova Cond, inherit;
+    font-family: Gill Sans Nova Cond, Arial, sans-serif;
     font-style: normal;
-
     font-size: x-large;
     color: white
 
@@ -28,7 +23,11 @@
 .logo:hover{
     color: white;
 }
-.middle {
+.middle-picture{
+    align-self: center;
+}
+
+.middle-text {
     position:absolute;
     left: 50%;
     top: 50%;
@@ -37,7 +36,6 @@
     transform: translate(-50%,0);
     font-size: xxx-large;
 }
-
 .titulka {
     height:100vh;
     width:100%;
@@ -50,7 +48,7 @@
     height: 100%;
 }
 .adresa{
-    font-family: Arial, inherit;
+    font-family: Arial, Arial, sans-serif;
 }
 .nav-link:hover{
     color: silver;
@@ -70,7 +68,11 @@
     object-fit: cover;
     margin: auto;
 }
-.carousel{
+.carousel {
     background-color: silver;
     height: 150px;
+}
+.btn-primary{
+    background-color: cadetblue!important;
+    border: cadetblue!important;
 }
