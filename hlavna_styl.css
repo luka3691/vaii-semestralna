@@ -105,3 +105,12 @@
 .example-image-decoration {
     border-style: ridge;
 }
+.login-button{
+    background-color: rgba(66,75,102,0.85);
+    color: white;
+    border-color: gray;
+}
+.login-button:hover{
+    border-color: white;
+    background-color: cadetblue;
+}
