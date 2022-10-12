@@ -7,9 +7,7 @@
     font-family: "Palatino Linotype", monospace;
     font-style: normal;
     font-size: x-large;
-    color: white
-}
-.dropdown-menu {
+    color: white;
 }
 .logo-header-wrapper{
     position: absolute;
@@ -98,12 +96,11 @@
 }
 .price{
     font-size: large;
-    font-style: italic;
     color: rgba(66,75,102,0.85);
-}
-.card-title{
     font-style: italic;
-
+}
+.card-title {
+    font-style: italic;
 }
 .example-image-decoration {
     border-style: ridge;
