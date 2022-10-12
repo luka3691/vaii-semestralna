@@ -89,6 +89,9 @@
     border-style: none;
     border-radius: 0 !important;
 }
+.elegant-button:hover{
+    color: gray;
+}
 .card-img-top{
     max-height: 256px;
     width: fit-content;
