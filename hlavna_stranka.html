@@ -8,9 +8,7 @@
     <link href="hlavna_styl.css" rel="stylesheet">
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg ">
-
+<nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,58 +30,129 @@
                     <a class="nav-link" href="#">Olivový olej</a>
                 </li>
             </ul>
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <input type="search" class="form-control form-control-dark" placeholder="Hľadať v obchode..." aria-label="Search">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Hľadanie v obchode..." aria-label="Search">
+                <button class="btn button-style" type="submit">Hľadať</button>
             </form>
 
         </div>
 
         <div class="logo-header-wrapper" href="#">
             <div class="logo logo-header">
-                <a style="text-decoration: none" class="logo" href="https://www.proseccostore.sk" target="_self">ProseccoStore</a>
+                <a style="text-decoration: none" class="logo" href="hlavna_stranka.html" target="_self">ProseccoStore</a>
             </div>
         </div>
 
     </div>
 </nav>
 
-<div class="container-text">
-    <img class="img-fluid titulka" src="pictures/vino-kopec.jpg" alt="Víno na kopci" >
-    <div class="text-nowrap middle-text">
-        Je čas na prosecco.
-    </div>
-</div>
-
-<div class="px-4 pt-5 my-5 text-center border-bottom">
-    <h1 class="display-4 fw-bold">To najlepšie z Talianska.</h1>
-    <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Tu budú produkty placeholder</p>
-        <div class="d-grid d-sm-flex justify-content-sm-center mb-5">
-            <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3 show-more">Zobraziť všetko</button>
+<main>
+    <div class="container-text">
+        <img class="img-fluid titulka" src="pictures/vino-kopec.jpg" alt="Víno na kopci" >
+        <div class="text-nowrap middle-text">
+            Je čas na prosecco.
         </div>
     </div>
 
-</div>
+    <div class="px-4 pt-5 my-3 text-center border-bottom">
+        <h1 class="display-4 fw-bold elegant-text">Novinky z Talianska.</h1>
+        <div class="col-lg-10 mx-auto">
+            <div class="row row-cols-1 row-cols-md-5 g-6 px-5 pt-2">
+                <div class="col">
+                    <a href="#" class="nav-link">
+                        <div class="card h-100">
+                            <img src="pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
+                            <div class="card-body">
+                                <h5 class="card-title">Montelliana - Prosecco DOC Treviso Frizzante Spago</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-nowrap price">4.60€</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#" class="nav-link">
+                        <div class="card h-100">
+                            <img src="pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
+                            <div class="card-body">
+                                <h5 class="card-title">Montelliana - Prosecco DOC Treviso Frizzante Spago</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-nowrap price">4.60€</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#" class="nav-link">
+                        <div class="card h-100">
+                            <img src="pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
+                            <div class="card-body">
+                                <h5 class="card-title">Montelliana - Prosecco DOC Treviso Frizzante Spago</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-nowrap price">4.60€</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#" class="nav-link">
+                        <div class="card h-100">
+                            <img src="pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
+                            <div class="card-body">
+                                <h5 class="card-title">Montelliana - Prosecco DOC Treviso Frizzante Spago</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-nowrap price">4.60€</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#" class="nav-link">
+                        <div class="card h-100">
+                            <img src="pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
+                            <div class="card-body">
+                                <h5 class="card-title">Montelliana - Prosecco DOC Treviso Frizzante Spago</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-nowrap price">4.60€</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <div class="d-grid d-sm-flex justify-content-sm-center mb-5 pt-3">
+                <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3 show-more elegant-button">Zobraziť všetko</button>
+            </div>
+        </div>
+
+    </div>
+</main>
+
 
 <div class="container">
-    <footer class="py-5">
+    <footer class="py-5 px-5">
         <div class="row">
             <div class="col-6 col-md-2 mb-3">
                 <h5>Pomoc</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Domov</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">O nás</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Kontakt</a></li>
+                    <li class="nav-item mb-2"><a href="hlavna_stranka.html" class="nav-link p-0 text-muted">Domov</a></li>
+                    <li class="nav-item mb-2"><a href="o-nas.html" class="nav-link p-0 text-muted">O nás</a></li>
+                    <li class="nav-item mb-2"><a href="kontakt.html" class="nav-link p-0 text-muted">Kontakt</a></li>
                 </ul>
             </div>
 
             <div class="col-6 col-md-2 mb-3">
                 <h5>Adresa</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><div class="adresa p-0 text-muted">FILAEXIM s.r.o.</div></li>
-                    <li class="nav-item mb-2"><div class="adresa p-0 text-muted">Zvolenská cesta 63/A</div></li>
-                    <li class="nav-item mb-2"><div class="adresa p-0 text-muted">97405 Banská Bystrica</div></li>
-                    <li class="nav-item mb-2"><div class="adresa p-0 text-muted">tel.: +421905634850</div></li>
+                    <li class="nav-item mb-0"><div class="adresa p-0 text-muted">FILAEXIM s.r.o.</div></li>
+                    <li class="nav-item mb-0"><div class="adresa p-0 text-muted">Zvolenská cesta 63/A</div></li>
+                    <li class="nav-item mb-0"><div class="adresa p-0 text-muted">97405 Banská Bystrica</div></li>
+                    <li class="nav-item mb-0"><div class="adresa p-0 text-muted">tel.: +421xxxx34850</div></li>
                 </ul>
             </div>
 
@@ -94,7 +163,7 @@
                     <div class="d-flex flex-column flex-sm-row w-100 gap-2">
                         <label for="newsletter1" class="visually-hidden">Emailová adresa</label>
                         <input id="newsletter1" type="text" class="form-control" placeholder="Emailová adresa">
-                        <button class="btn btn-primary" type="button">Odoberať</button>
+                        <button class="btn btn-primary button-style" type="button">Odoberať</button>
                     </div>
                 </form>
             </div>

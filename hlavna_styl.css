@@ -1,16 +1,15 @@
 .navbar {
     background: rgba(97,106,142,0.84);
-    position: fixed;
     width: 100%;
     overflow: hidden;
-    z-index: 1;
 }
 .logo {
-    font-family: Gill Sans Nova Cond, monospace;
+    font-family: "Palatino Linotype", monospace;
     font-style: normal;
     font-size: x-large;
     color: white
-
+}
+.dropdown-menu {
 }
 .logo-header-wrapper{
     position: absolute;
@@ -52,6 +51,7 @@
 }
 .nav-link:hover{
     color: silver;
+    text-decoration: none;
 }
 .carousel-item {
     align-self: center;
@@ -72,7 +72,39 @@
     background-color: silver;
     height: 150px;
 }
-.btn-primary{
+.elegant-text {
+    font-family: "Palatino Linotype", monospace;
+    font-style: italic;
+}
+
+.button-style{
     background-color: cadetblue!important;
     border: cadetblue!important;
+}
+
+.elegant-button{
+    background-color: rgba(26,29,40,0.85)!important;
+    border: rgba(26,29,40,0.85)!important;
+    color: white;
+    font-size: medium;
+    font-family: "Arial Nova Light", monospace;
+    border-style: none;
+    border-radius: 0 !important;
+}
+.card-img-top{
+    max-height: 256px;
+    width: fit-content;
+    align-self: center;
+}
+.price{
+    font-size: large;
+    font-style: italic;
+    color: rgba(66,75,102,0.85);
+}
+.card-title{
+    font-style: italic;
+
+}
+.example-image-decoration {
+    border-style: ridge;
 }
