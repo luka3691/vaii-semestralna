@@ -1,3 +1,10 @@
+<?php
+session_start();
+include "Auth.php";
+
+$auth = new Auth();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Index</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link href="hlavna_styl.css" rel="stylesheet">
+    <link href="public/css/hlavna_styl.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg fixed-top">
@@ -36,7 +43,11 @@
                     <button class="btn button-style disabled" type="submit">Hľadať</button>
                 </form>
                 <div class="text-end ps-2">
-                    <button type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal">Prihlásiť sa</button>
+                    <?php if ($auth->isLoggedIn) { ?>
+                        <button type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#logoutModal" data-bs-toggle="modal">Odhlasit sa</button>
+                    <?php } else { ?>
+                        <button type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal">Prihlásiť sa</button>
+                    <?php } ?>
                 </div>
             </div>
 
@@ -51,37 +62,52 @@
 
     </div>
 </nav>
+<div>
+    <?php if ($auth->isLoggedIn) { ?>
+        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
 
-<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content rounded-4 shadow">
-            <div class="modal-header p-5 pb-4 border-bottom-0">
-                <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
-                <h1 class="fw-bold mb-0 fs-2">Prihláste sa do svojho zákazníckeho účtu.</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body p-5 pt-0">
-                <form class="">
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control rounded-3 text-bg-light " id="floatingInputLogin" placeholder="name@example.com">
-                        <label class="text-black" for="floatingInputLogin">Email</label>
+                    <div class="modal-body">
+                        <button type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#logoutModal" data-bs-toggle="modal">Odhlasit sa</button>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="password" class="form-control rounded-3 text-bg-light" id="floatingPasswordLogin" placeholder="Password">
-                        <label class="text-black" for="floatingPasswordLogin">Heslo</label>
-                    </div>
-                    <button class="w-100 mb-2 btn btn-lg elegant-button disabled" name="login" type="submit">Prihlásiť sa</button>
-
-                </form>
+                </div>
             </div>
         </div>
-    </div>
+    <?php } else { ?>
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-4 shadow">
+                    <div class="modal-header p-5 pb-4 border-bottom-0">
+                        <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
+                        <h1 class="fw-bold mb-0 fs-2">Prihláste sa do svojho zákazníckeho účtu.</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body p-5 pt-0">
+                        <form class="">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control rounded-3 text-bg-light " id="floatingInputLogin" placeholder="name@example.com">
+                                <label class="text-black" for="floatingInputLogin">Email</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control rounded-3 text-bg-light" id="floatingPasswordLogin" placeholder="Password">
+                                <label class="text-black" for="floatingPasswordLogin">Heslo</label>
+                            </div>
+                            <button class="w-100 mb-2 btn btn-lg elegant-button disabled" name="login" type="submit">Prihlásiť sa</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
 </div>
+
 
 <main>
     <div class="container-text">
-        <img class="img-fluid titulka" src="pictures/vino-kopec.jpg" alt="Víno na kopci" >
+        <img class="img-fluid titulka" src="public/images/pictures/vino-kopec.jpg" alt="Víno na kopci" >
         <div class="text-nowrap middle-text">
             Je čas na prosecco.
         </div>
@@ -94,7 +120,7 @@
                 <div class="col">
                     <a href="#" class="nav-link">
                         <div class="card h-100">
-                            <img src="pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
+                            <img src="public/images/pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
                             <div class="card-body">
                                 <h5 class="card-title">Montelliana - Prosecco DOC Treviso Frizzante Spago</h5>
                             </div>
@@ -107,7 +133,7 @@
                 <div class="col">
                     <a href="#" class="nav-link">
                         <div class="card h-100">
-                            <img src="pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
+                            <img src="public/images/pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
                             <div class="card-body">
                                 <h5 class="card-title">Montelliana - Prosecco DOC Treviso Frizzante Spago</h5>
                             </div>
@@ -120,7 +146,7 @@
                 <div class="col">
                     <a href="#" class="nav-link">
                         <div class="card h-100">
-                            <img src="pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
+                            <img src="public/images/pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
                             <div class="card-body">
                                 <h5 class="card-title">Montelliana - Prosecco DOC Treviso Frizzante Spago</h5>
                             </div>
@@ -133,7 +159,7 @@
                 <div class="col">
                     <a href="#" class="nav-link">
                         <div class="card h-100">
-                            <img src="pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
+                            <img src="public/images/pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
                             <div class="card-body">
                                 <h5 class="card-title">Montelliana - Prosecco DOC Treviso Frizzante Spago</h5>
                             </div>
@@ -146,7 +172,7 @@
                 <div class="col">
                     <a href="#" class="nav-link">
                         <div class="card h-100">
-                            <img src="pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
+                            <img src="public/images/pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
                             <div class="card-body">
                                 <h5 class="card-title">Montelliana - Prosecco DOC Treviso Frizzante Spago</h5>
                             </div>
@@ -167,13 +193,13 @@
     <div id="carouselLogo" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="5000">
-                <img class="d-block w-15 logo-carousel" src="pictures/bedin-logo.png" alt="First slide">
+                <img class="d-block w-15 logo-carousel" src="public/images/pictures/bedin-logo.png" alt="First slide">
             </div>
             <div class="carousel-item "  data-bs-interval="5000">
-                <img class="d-block w-15 logo-carousel" src="pictures/italo-cescon-logo.png" alt="Second slide">
+                <img class="d-block w-15 logo-carousel" src="public/images/pictures/italo-cescon-logo.png" alt="Second slide">
             </div>
             <div class="carousel-item "  data-bs-interval="5000">
-                <img class="d-block w-15 logo-carousel" src="pictures/perlago-logo.png" alt="Third slide">
+                <img class="d-block w-15 logo-carousel" src="public/images/pictures/perlago-logo.png" alt="Third slide">
             </div>
         </div>
     </div>

@@ -10,6 +10,9 @@ class Auth
             $this->login($_POST['login']);
         }
 
+        if (isset($_GET['odhlas'])) {
+            $this->logout();
+        }
 
         if (isset($_SESSION['logged'])) {
             $this->isLoggedIn = true;
@@ -28,6 +31,7 @@ class Auth
     public function logout() {
         $this->isLoggedIn = false;
         unset($_SESSION['logged']);
-        session_destroy();
+        header("Location: ?");
+
     }
 }

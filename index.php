@@ -1,5 +1,7 @@
 <?php
-session_start();
-include "Auth.php";
+require "ClassLoader.php";
 
-$auth = new Auth();
+use App\App;
+
+$app = new App();
+$app->run();
