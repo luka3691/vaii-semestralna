@@ -1,21 +1,49 @@
 <?php /** @var Array $data */ ?>
-<div class="row">
-    <div class="col">
-        <h3>Fakulta riadenia a informatiky</h3>
-        <strong>Adresa</strong>: Univerzitná 8215/1, 010 26 Žilina<br>
-        <strong>Tel. číslo</strong>: +421/41 513 4121<br>
+<div class="container-text">
+    <img class="img-fluid titulka" src="public/images/pictures/polica-s-vinom.jpg" alt="Víno v polici" >
+    <div class="text-nowrap middle-text">
+        Kontaktujte nás.
+    </div>
+</div>
 
-        <strong>GPS</strong>: 49°12'6,4"N 18°45'42,6"E
+<div class="px-2 pt-2 my-4  text-center border-bottom">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-md-8 mx-auto">
+                    <h1 class="display-6 ">Máte otázky?</h1>
+                    <div class="col-lg-8 mx-auto">
+                        <p class="lead mb-4 elegant-text">  Pošlite mail na adresu prossecostore@gmail.com, zavolajte na +4219xxxx4850 alebo nám pošlite správu pomocou formulára a my sa ku Vám vrátime.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row mt-3">
-    <div class="col">
-        <iframe width="100%" height="300"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=18.747396469116214%2C49.193792384417996%2C18.776578903198246%2C49.210336337994846&amp;layer=mapnik&amp;marker=49.202065053033984%2C18.761987686157227"></iframe>
-    </div>
-</div>
-<div class="row mt-3">
-    <div class="col">
-        <a href="?c=home">Späť na hlavnú stránku</a>
+<div class="container col-md-6 px-5">
+    <div class="row align-items-stretch no-gutters contact-wrap">
+        <form class="row g-3">
+            <h1 class="display-6 ">Kontaktný formulár</h1>
+            <div class="col-md-6">
+                <label for="inputName4" class="form-label">Meno *</label>
+                <input type="text" class="form-control" id="inputName4">
+            </div>
+            <div class="col-md-6">
+                <label for="inputOrganization4" class="form-label">Organizácia</label>
+                <input type="text" class="form-control" id="inputOrganization4">
+            </div>
+            <div class="col-12">
+                <label for="inputEmail4" class="form-label">Email *</label>
+                <input type="email" class="form-control" id="inputEmail4">
+            </div>
+            <div class="col-12">
+                <label for="inputMessage2" class="form-label">Správa *</label>
+                <textarea class="form-control" id="inputMessage2" rows="3" placeholder="Sem napíšte text správy..."></textarea>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary button-style">Odoslať</button>
+            </div>
+        </form>
     </div>
 </div>

@@ -1,10 +1,47 @@
 <?php
 /** @var string $contentHTML */
 /** @var \App\Core\IAuthenticator $auth */
+
+function getParam($name): string|null
+{
+    return isset($_POST[$name]) ? htmlspecialchars(trim($_POST[$name]), ENT_QUOTES) : null;
+}
+
+function printErrorMessage($errors, $key): string
+{
+    if (isset($errors[$key])) {
+        return "<h5 class='form-error' style='color: red'>{$errors[$key]}</h5>";
+    }
+    return "";
+}
+
+$errors = [];
+$isPost = $_SERVER['REQUEST_METHOD'] == "POST";
+if ($isPost) {
+    $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+    if (!$email) {
+        $errors['email'] = "Emailová adresa nie je platná.";
+    } else {
+
+        if (empty($errors)) {
+            $exists = \App\Models\Newsletter::getAll("email = ?", [$email]);
+            if (count($exists) == 0) {
+                $newsletter = new \App\Models\Newsletter();
+                $newsletter->setEmail($email);
+                $newsletter->setConfirmed(0);
+                $newsletter->save();
+            } else {
+                $errors['email'] = "Emailová adresa je uz prihlasena.";
+            }
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="sk">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= \App\Config\Configuration::APP_NAME ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -14,41 +51,161 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="public/css/styl.css">
+    <link href="public/css/hlavna_styl.css" rel="stylesheet">
     <script src="public/js/script.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-light">
+
+<nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="?c=home">
-            <img src="public/images/vaiicko_logo.png" title="<?= \App\Config\Configuration::APP_NAME ?>"
-                 title="<?= \App\Config\Configuration::APP_NAME ?>">
-        </a>
-        <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="?c=home&a=contact">Kontakt</a>
-            </li>
-        </ul>
-        <?php if ($auth->isLogged()) { ?>
-            <span class="navbar-text">Prihlásený používateľ: <b><?= $auth->getLoggedUserName() ?></b></span>
-            <ul class="navbar-nav ms-auto">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
                 <li class="nav-item">
-                    <a class="nav-link" href="?c=auth&a=logout">Odhlásenie</a>
+                    <a class="nav-link" href="?c=products&a=prosecco">Prosecco</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Víno</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Spritz Aperitív</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Olivový olej</a>
                 </li>
             </ul>
-        <?php } else { ?>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlásenie</a>
-                </li>
-            </ul>
-        <?php } ?>
+            <div class="d-flex justify-content-center">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2 flex" type="search" placeholder="Hľadanie v obchode..." aria-label="Search">
+                    <button class="btn button-style disabled" type="submit">Hľadať</button>
+                </form>
+                <div class="text-end ps-2">
+                    <?php if ($auth->isLogged()) { ?>
+                        <a class="nav-link" href="?c=auth&a=logout"><button type="submit" class="btn btn-outline-primary me-2 login-button"  >Odhlásiť sa</button></a>
+
+                    <?php } else { ?>
+                        <button type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal" >Prihlásiť sa</button>
+                    <?php } ?>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="logo-header-wrapper">
+            <div class="logo logo-header">
+                <a style="text-decoration: none" class="logo" href="?c=home" target="_self">ProseccoStore</a>
+            </div>
+        </div>
+
+
     </div>
 </nav>
-<div class="container-fluid mt-3">
-    <div class="web-content">
-        <?= $contentHTML ?>
-    </div>
+
+<div>
+    <?php if ($auth->isLogged()) { ?>
+        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <button type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#logoutModal" data-bs-toggle="modal" href="?c=auth&a=logout">Odhlasit sa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } else { ?>
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-4 shadow">
+                    <div class="modal-header p-5 pb-4 border-bottom-0">
+                        <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
+                        <h1 class="fw-bold mb-0 fs-2">Prihláste sa do svojho zákazníckeho účtu.</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body p-5 pt-0">
+                        <form class="form-signin" method="post" action="<?= \App\Config\Configuration::LOGIN_URL ?>">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control rounded-3 text-bg-light " id="floatingInputLogin" placeholder="name@example.com" required>
+                                <label class="text-black" for="floatingInputLogin">Email</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control rounded-3 text-bg-light" id="floatingPasswordLogin" placeholder="Heslo" required>
+                                <label class="text-black" for="floatingPasswordLogin">Heslo</label>
+                            </div>
+                            <button class="w-100 mb-2 btn btn-lg elegant-button" name="login" type="submit">Prihlásiť sa</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
 </div>
+<main>
+    <?= $contentHTML ?>
+</main>
+<div class="container">
+    <footer class="py-5 px-5">
+        <div class="row">
+            <div class="col-6 col-md-2 mb-3">
+                <h5>Pomoc</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="?c=home" class="nav-link p-0 text-muted">Domov</a></li>
+                    <li class="nav-item mb-2"><a href="?c=home&a=about" class="nav-link p-0 text-muted">O nás</a></li>
+                    <li class="nav-item mb-2"><a href="?c=home&a=contact" class="nav-link p-0 text-muted">Kontakt</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-2 mb-3">
+                <h5>Adresa</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-0"><div class="adresa p-0 text-muted">FILAEXIM s.r.o.</div></li>
+                    <li class="nav-item mb-0"><div class="adresa p-0 text-muted">Zvolenská cesta 63/A</div></li>
+                    <li class="nav-item mb-0"><div class="adresa p-0 text-muted">97405 Banská Bystrica</div></li>
+                    <li class="nav-item mb-0"><div class="adresa p-0 text-muted">tel.: +421xxxx34850</div></li>
+                </ul>
+            </div>
+
+            <div class="col-md-5 offset-md-1 mb-3">
+                <?php if ($isPost && empty($errors)) {
+                ?>
+                    <h5>Dakujeme za odber!</h5>
+                <?php
+                }
+                else { ?>
+                    <form method="POST">
+                        <h5>Prihlásiť na odber newslettera</h5>
+                        <p>Najnovšie produkty priamo na váš email.</p>
+                        <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                            <label for="email newsletter1" class="visually-hidden">Emailová adresa</label>
+                            <input id="email newsletter1" name="email" type="email" class="form-control" placeholder="Emailová adresa" value="<?=getParam("email")?>">
+                            <button class="btn btn-primary button-style" type="submit">Odoberať</button>
+
+
+                        </div>
+                    </form>
+                    <?=printErrorMessage($errors, "email")?>
+
+                <?php } ?>
+            </div>
+        </div>
+
+        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+            <p>© 2022 Filaexim s.r.o.</p>
+            <ul class="list-unstyled d-flex">
+                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+            </ul>
+        </div>
+    </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>

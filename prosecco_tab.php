@@ -182,8 +182,8 @@
         <h5>Pomoc</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="indexik.php" class="nav-link p-0 text-muted">Domov</a></li>
-          <li class="nav-item mb-2"><a href="o-nas.html" class="nav-link p-0 text-muted">O nás</a></li>
-          <li class="nav-item mb-2"><a href="kontakt.html" class="nav-link p-0 text-muted">Kontakt</a></li>
+          <li class="nav-item mb-2"><a href="o-nas.php" class="nav-link p-0 text-muted">O nás</a></li>
+          <li class="nav-item mb-2"><a href="kontakt.php" class="nav-link p-0 text-muted">Kontakt</a></li>
         </ul>
       </div>
 

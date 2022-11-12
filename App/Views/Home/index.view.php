@@ -1,29 +1,66 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col mt-5">
-            <div class="text-center">
-                <h2>Vaííčko MVC FW</h2>
-                <img src="public/images/vaiicko_logo.png">
-                <p>
-                    Gratulujeme vám, úspešne sa vám podarilo nainštalovať a spustiť framework <strong>Vaííčko</strong> <?= \App\Config\Configuration::FW_VERSION ?>!<br>
-                    Dúfame, že sa Vám pomocou totho frameworku vytvoríte nejakú skvelú aplikáciu.<br>
-                </p>
-                <p>
-                    Tento jednoduchý framework bol vytvorený pre lepšie pochopenie architektúry MVC.<br>
-                    Je určený pre študentov predmetu <em>vývoj aplikcií pre internet a intranet</em>, ale nielen im.
-                </p>
-            </div>
+<?php
+/** @var \App\Core\IAuthenticator $auth */
+?>
+
+<div class="container-text">
+    <img class="img-fluid titulka" src="public/images/pictures/vino-kopec.jpg" alt="Víno na kopci" >
+    <div class="text-nowrap middle-text">
+        Je čas na prosecco.
+    </div>
+</div>
+
+<div class="px-4 pt-5 my-3 text-center border-bottom">
+    <h1 class="display-4 fw-bold elegant-text">Novinky z Talianska.</h1>
+    <div class="col-lg-10 mx-auto">
+        <div class="row row-cols-1 row-cols-md-4 g-6 px-5 pt-2">
+            <?php $exists = \App\Models\Product::getAll();
+            $x = 0;
+            if (count($exists) > 4) {
+                $x = 5;
+            } else {
+                $x = count($exists);
+            }
+            ?>
+            <?php for ($i = 0; $i < $x  ; $i++){?>
+                <div class="col pb-4">
+                    <a href="#" class="nav-link">
+                        <div class="card h-100">
+                            <img src="public/images/pictures/<?= $exists[$i]->getImg() ?>" class="card-img-top pt-2" alt="prosecco">
+                            <div class="card-body">
+                                <h5 class="card-title pb">
+                                    <?= $exists[$i]->getName() ?>
+                                </h5>
+
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-nowrap price"> <?= $exists[$i]->getPrice() ?> eur</small>
+
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            <?php } ?>
+
+
+        </div>
+        <div class="d-grid d-sm-flex justify-content-sm-center mb-5 pt-3">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3 show-more elegant-button">Zobraziť všetko</button>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col text-center">
-            <h4>Autori</h4>
-            <div>
-                <a href="mailto:Patrik.Hrkut@fri.uniza.sk">Ing. Patrik Hrkút, PhD.</a><br>
-                <a href="mailto:Michal.Duracik@fri.uniza.sk">Ing. Michal Ďuračík, PhD.</a><br>
-                <a href="mailto:Matej.Mesko@fri.uniza.sk">Ing. Matej Meško, PhD.</a><br><br>
-                &copy; 2020-2022 Fakulta riadenia a informatiky, Katedra softvérových technológií
-            </div>
+
+</div>
+<div id="carouselLogo" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="5000">
+            <img class="d-block w-15 logo-carousel" src="public/images/pictures/bedin-logo.png" alt="First slide">
+        </div>
+        <div class="carousel-item "  data-bs-interval="5000">
+            <img class="d-block w-15 logo-carousel" src="public/images/pictures/italo-cescon-logo.png" alt="Second slide">
+        </div>
+        <div class="carousel-item "  data-bs-interval="5000">
+            <img class="d-block w-15 logo-carousel" src="public/images/pictures/perlago-logo.png" alt="Third slide">
         </div>
     </div>
 </div>

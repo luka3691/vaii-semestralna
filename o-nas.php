@@ -20,7 +20,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="prosecco_tab.html">Prosecco</a>
+                    <a class="nav-link" href="prosecco_tab.php">Prosecco</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Víno</a>
@@ -152,7 +152,7 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="indexik.php" class="nav-link p-0 text-muted">Domov</a></li>
                     <li class="nav-item mb-2"><a href="o-nas.html" class="nav-link p-0 text-muted">O nás</a></li>
-                    <li class="nav-item mb-2"><a href="kontakt.html" class="nav-link p-0 text-muted">Kontakt</a></li>
+                    <li class="nav-item mb-2"><a href="kontakt.php" class="nav-link p-0 text-muted">Kontakt</a></li>
                 </ul>
             </div>
 

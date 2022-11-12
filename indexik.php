@@ -25,7 +25,7 @@ $auth = new Auth();
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="prosecco_tab.html">Prosecco</a>
+                    <a class="nav-link" href="prosecco_tab.php">Prosecco</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Víno</a>
@@ -62,47 +62,7 @@ $auth = new Auth();
 
     </div>
 </nav>
-<div>
-    <?php if ($auth->isLoggedIn) { ?>
-        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
 
-                    <div class="modal-body">
-                        <button type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#logoutModal" data-bs-toggle="modal">Odhlasit sa</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php } else { ?>
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content rounded-4 shadow">
-                    <div class="modal-header p-5 pb-4 border-bottom-0">
-                        <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
-                        <h1 class="fw-bold mb-0 fs-2">Prihláste sa do svojho zákazníckeho účtu.</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body p-5 pt-0">
-                        <form class="">
-                            <div class="form-floating mb-3">
-                                <input type="email" class="form-control rounded-3 text-bg-light " id="floatingInputLogin" placeholder="name@example.com">
-                                <label class="text-black" for="floatingInputLogin">Email</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control rounded-3 text-bg-light" id="floatingPasswordLogin" placeholder="Password">
-                                <label class="text-black" for="floatingPasswordLogin">Heslo</label>
-                            </div>
-                            <button class="w-100 mb-2 btn btn-lg elegant-button disabled" name="login" type="submit">Prihlásiť sa</button>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php } ?>
-</div>
 
 
 <main>
@@ -126,6 +86,47 @@ $auth = new Auth();
                             </div>
                             <div class="card-footer">
                                 <small class="text-nowrap price">4.60€</small>
+                                <div>
+                                    <?php if ($auth->isLoggedIn) { ?>
+                                        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+
+                                                    <div class="modal-body">
+                                                        <button type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#logoutModal" data-bs-toggle="modal">Odhlasit sa</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } else { ?>
+                                        <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content rounded-4 shadow">
+                                                    <div class="modal-header p-5 pb-4 border-bottom-0">
+                                                        <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
+                                                        <h1 class="fw-bold mb-0 fs-2">Prihláste sa do svojho zákazníckeho účtu.</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+
+                                                    <div class="modal-body p-5 pt-0">
+                                                        <form class="">
+                                                            <div class="form-floating mb-3">
+                                                                <input type="email" class="form-control rounded-3 text-bg-light " id="floatingInputLogin" placeholder="name@example.com">
+                                                                <label class="text-black" for="floatingInputLogin">Email</label>
+                                                            </div>
+                                                            <div class="form-floating mb-3">
+                                                                <input type="password" class="form-control rounded-3 text-bg-light" id="floatingPasswordLogin" placeholder="Password">
+                                                                <label class="text-black" for="floatingPasswordLogin">Heslo</label>
+                                                            </div>
+                                                            <button class="w-100 mb-2 btn btn-lg elegant-button disabled" name="login" type="submit">Prihlásiť sa</button>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -213,8 +214,8 @@ $auth = new Auth();
                 <h5>Pomoc</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="index.html" class="nav-link p-0 text-muted">Domov</a></li>
-                    <li class="nav-item mb-2"><a href="o-nas.html" class="nav-link p-0 text-muted">O nás</a></li>
-                    <li class="nav-item mb-2"><a href="kontakt.html" class="nav-link p-0 text-muted">Kontakt</a></li>
+                    <li class="nav-item mb-2"><a href="o-nas.php" class="nav-link p-0 text-muted">O nás</a></li>
+                    <li class="nav-item mb-2"><a href="kontakt.php" class="nav-link p-0 text-muted">Kontakt</a></li>
                 </ul>
             </div>
 

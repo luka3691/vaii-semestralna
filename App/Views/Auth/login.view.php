@@ -31,3 +31,30 @@ $layout = 'auth';
         </div>
     </div>
 </div>
+
+<!-- <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                 -- <h1 class="modal-title fs-5" >Modal title</h1>
+                <h1 class="fw-bold mb-0 fs-2">Prihláste sa do svojho zákazníckeho účtu.</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <form class="">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control rounded-3 text-bg-light " id="floatingInputLogin" placeholder="name@example.com">
+                        <label class="text-black" for="floatingInputLogin">Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control rounded-3 text-bg-light" id="floatingPasswordLogin" placeholder="Password">
+                        <label class="text-black" for="floatingPasswordLogin">Heslo</label>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg elegant-button disabled" name="login" type="submit">Prihlásiť sa</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
