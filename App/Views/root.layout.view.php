@@ -31,7 +31,7 @@ if ($isPost) {
                 $newsletter->setConfirmed(0);
                 $newsletter->save();
             } else {
-                $errors['email'] = "Emailová adresa je uz prihlasena.";
+                $errors['email'] = "Emailová adresa je už prihlásená na odber.";
             }
         }
     }
@@ -86,7 +86,6 @@ if ($isPost) {
                 <div class="text-end ps-2">
                     <?php if ($auth->isLogged()) { ?>
                         <a class="nav-link" href="?c=auth&a=logout"><button type="submit" class="btn btn-outline-primary me-2 login-button"  >Odhlásiť sa</button></a>
-
                     <?php } else { ?>
                         <button type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal" >Prihlásiť sa</button>
                     <?php } ?>
@@ -131,14 +130,14 @@ if ($isPost) {
                     <div class="modal-body p-5 pt-0">
                         <form class="form-signin" method="post" action="<?= \App\Config\Configuration::LOGIN_URL ?>">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control rounded-3 text-bg-light " id="floatingInputLogin" placeholder="name@example.com" required>
+                                <input type="text" name="login" class="form-control rounded-3 text-bg-light " id="login" placeholder="name@example.com" required>
                                 <label class="text-black" for="floatingInputLogin">Email</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control rounded-3 text-bg-light" id="floatingPasswordLogin" placeholder="Heslo" required>
+                                <input name="password" type="password" class="form-control rounded-3 text-bg-light" id="password" placeholder="Heslo" required>
                                 <label class="text-black" for="floatingPasswordLogin">Heslo</label>
                             </div>
-                            <button class="w-100 mb-2 btn btn-lg elegant-button" name="login" type="submit">Prihlásiť sa</button>
+                            <button class="w-100 mb-2 btn btn-lg elegant-button" name="submit" type="submit">Prihlásiť sa</button>
 
                         </form>
                     </div>
@@ -175,7 +174,7 @@ if ($isPost) {
             <div class="col-md-5 offset-md-1 mb-3">
                 <?php if ($isPost && empty($errors)) {
                 ?>
-                    <h5>Dakujeme za odber!</h5>
+                    <h5>Ďakujeme za odber!</h5>
                 <?php
                 }
                 else { ?>
