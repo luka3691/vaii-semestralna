@@ -9,6 +9,9 @@ class Newsletter extends Model
     protected $id;
     protected $email;
     protected $confirmed;
+    protected $orderUpdate;
+    protected $newProduct;
+    protected $saleAlert;
 
     /**
      * @return mixed
@@ -57,6 +60,55 @@ class Newsletter extends Model
     {
         $this->confirmed = $confirmed;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getOrderUpdate()
+    {
+        return $this->orderUpdate;
+    }
+
+    /**
+     * @param mixed $orderUpdate
+     */
+    public function setOrderUpdate($orderUpdate): void
+    {
+        $this->orderUpdate = $orderUpdate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewProduct()
+    {
+        return $this->newProduct;
+    }
+
+    /**
+     * @param mixed $newProduct
+     */
+    public function setNewProduct($newProduct): void
+    {
+        $this->newProduct = $newProduct;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSaleAlert()
+    {
+        return $this->saleAlert;
+    }
+
+    /**
+     * @param mixed $saleAlert
+     */
+    public function setSaleAlert($saleAlert): void
+    {
+        $this->saleAlert = $saleAlert;
+    }
+
 
 
 }

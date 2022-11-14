@@ -36,6 +36,21 @@ class ProductsController extends AControllerBase {
             'data' => Product::getAll()
         ]);
     }
+
+    /**
+     * @return \App\Core\Responses\Response|\App\Core\Responses\ViewResponse
+     * @throws \Exception
+     */
+    public function product(): Response
+    {
+        return $this->html([
+            'data' => Product::getAll()
+        ]);
+    }
+
+
+
+
 }
 
 

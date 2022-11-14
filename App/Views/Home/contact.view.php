@@ -1,6 +1,6 @@
 <?php /** @var Array $data */ ?>
 <div class="container-text">
-    <img class="img-fluid titulka" src="public/images/pictures/polica-s-vinom.jpg" alt="Víno v polici" >
+    <img class="img-fluid titulka" src="/public/images/pictures/polica-s-vinom.jpg" alt="Víno v polici" >
     <div class="text-nowrap middle-text">
         Kontaktujte nás.
     </div>
@@ -42,7 +42,7 @@
             </div>
 
             <div class="col-12">
-                <button type="submit" class="btn btn-primary button-style">Odoslať</button>
+                <button type="submit" class="btn btn-primary button-style" disabled>Odoslať</button>
             </div>
         </form>
     </div>

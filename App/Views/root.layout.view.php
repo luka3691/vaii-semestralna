@@ -29,6 +29,9 @@ if ($isPost) {
                 $newsletter = new \App\Models\Newsletter();
                 $newsletter->setEmail($email);
                 $newsletter->setConfirmed(0);
+                $newsletter->setOrderUpdate(0);
+                $newsletter->setNewProduct(0);
+                $newsletter->setSaleAlert(0);
                 $newsletter->save();
             } else {
                 $errors['email'] = "Emailová adresa je už prihlásená na odber.";
@@ -51,8 +54,8 @@ if ($isPost) {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
-    <link href="public/css/hlavna_styl.css" rel="stylesheet">
-    <script src="public/js/script.js"></script>
+    <link href="/public/css/hlavna_styl.css" rel="stylesheet">
+    <script src="/public/js/script.js"></script>
 </head>
 <body>
 
@@ -64,7 +67,6 @@ if ($isPost) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
                 <li class="nav-item">
                     <a class="nav-link" href="?c=products&a=prosecco">Prosecco</a>
                 </li>
@@ -91,6 +93,15 @@ if ($isPost) {
                     <?php } ?>
 
                 </div>
+                <button type="button" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" id="cart-no-plus" >
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16" id="cart-check" color="yellow">
+                        <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"></path>
+                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+                    </svg>
+                </button>
             </div>
 
         </div>
@@ -131,11 +142,11 @@ if ($isPost) {
                         <form class="form-signin" method="post" action="<?= \App\Config\Configuration::LOGIN_URL ?>">
                             <div class="form-floating mb-3">
                                 <input type="text" name="login" class="form-control rounded-3 text-bg-light " id="login" placeholder="name@example.com" required>
-                                <label class="text-black" for="floatingInputLogin">Email</label>
+                                <label class="text-black" for="login">Email</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input name="password" type="password" class="form-control rounded-3 text-bg-light" id="password" placeholder="Heslo" required>
-                                <label class="text-black" for="floatingPasswordLogin">Heslo</label>
+                                <label class="text-black" for="password">Heslo</label>
                             </div>
                             <button class="w-100 mb-2 btn btn-lg elegant-button" name="submit" type="submit">Prihlásiť sa</button>
 
@@ -185,12 +196,10 @@ if ($isPost) {
                             <label for="email newsletter1" class="visually-hidden">Emailová adresa</label>
                             <input id="email newsletter1" name="email" type="email" class="form-control" placeholder="Emailová adresa" value="<?=getParam("email")?>">
                             <button class="btn btn-primary button-style" type="submit">Odoberať</button>
-
-
                         </div>
                     </form>
                     <?=printErrorMessage($errors, "email")?>
-
+                    <a class="nav-link" href="?c=auth&a=newsletter">Pokiaľ sa chcete odlásiť z newslettera, kliknite sem.</a>
                 <?php } ?>
             </div>
         </div>
@@ -205,6 +214,8 @@ if ($isPost) {
         </div>
     </footer>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
 </body>
 </html>

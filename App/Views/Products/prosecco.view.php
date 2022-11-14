@@ -6,7 +6,7 @@ use App\Models\Product;
 ?>
 
 <div class="container-text">
-    <img class="img-fluid titulka" src="public/images/pictures/prosecco-main.jpg" alt="Víno na kopci" >
+    <img class="img-fluid titulka" src="/public/images/pictures/prosecco-main.jpg" alt="Víno na kopci" >
     <div class="text-nowrap middle-text">
         Prosecco.
     </div>
@@ -22,13 +22,13 @@ use App\Models\Product;
                 <div class="album py-5 bg-light">
                     <div class="container">
                         <div class="col-lg-10 mx-auto ">
-                            <div class="row row-cols-5 row-cols-md-3 g-6 px-5 pt-2 ">
+                            <div class="row row-cols-1 row-cols-md-3 g-6 px-5 pt-2 ">
 
                                 <?php foreach ($data['data'] as $product) {?>
                                     <div class="col pb-4">
                                         <a href="#" class="nav-link">
                                             <div class="card h-100">
-                                                <img src="public/images/pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
+                                                <img src="/public/images/pictures/prosecco-example.png" class="card-img-top pt-2" alt="prosecco">
                                                 <div class="card-body">
                                                     <h5 class="card-title">
                                                         <?= $product->getName() ?>

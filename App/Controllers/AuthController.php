@@ -50,4 +50,14 @@ class AuthController extends AControllerBase
         $this->app->getAuth()->logout();
         return $this->redirect("?c=home");
     }
+
+    /**
+     * Login a user
+     * @return \App\Core\Responses\RedirectResponse|\App\Core\Responses\ViewResponse
+     */
+    public function newsletter(): Response
+    {
+
+        return $this->html();
+    }
 }
