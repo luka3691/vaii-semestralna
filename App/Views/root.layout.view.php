@@ -71,25 +71,26 @@ if ($isPost) {
                     <a class="nav-link" href="?c=products&a=prosecco">Prosecco</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Víno</a>
+                    <a class="nav-link" href="?c=products&a=wine">Víno</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Spritz Aperitív</a>
+                    <a class="nav-link" href="?c=products&a=spritz">Spritz Aperitív</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Olivový olej</a>
+                    <a class="nav-link" href="?c=products&a=oliveoil">Olivový olej</a>
                 </li>
             </ul>
             <div class="d-flex justify-content-center">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2 flex" type="search" placeholder="Hľadanie v obchode..." aria-label="Search">
+                <form method="POST" class="d-flex" role="search">
+                    <input class="form-control me-2 flex" name="search" type="search" placeholder="Hľadanie v obchode..." aria-label="Search" value="<?=getParam("search")?>">
                     <button class="btn button-style disabled" type="submit">Hľadať</button>
+
                 </form>
                 <div class="text-end ps-2">
                     <?php if ($auth->isLogged()) { ?>
                         <a class="nav-link" href="?c=auth&a=logout"><button type="submit" class="btn btn-outline-primary me-2 login-button"  >Odhlásiť sa</button></a>
                     <?php } else { ?>
-                        <button type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal" >Prihlásiť sa</button>
+                        <button id="loginModalTrigger" type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal" >Prihlásiť sa</button>
                     <?php } ?>
 
                 </div>
@@ -97,10 +98,13 @@ if ($isPost) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" id="cart-no-plus" >
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
                     </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16" id="cart-check" color="yellow">
-                        <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"></path>
-                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
-                    </svg>
+                    <?php if ($auth->isLogged()) { ?>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16" id="cart-check" color="yellow">
+                            <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"></path>
+                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+                        </svg>
+                    <?php } ?>
+
                 </button>
             </div>
 
@@ -135,9 +139,11 @@ if ($isPost) {
                     <div class="modal-header p-5 pb-4 border-bottom-0">
                         <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
                         <h1 class="fw-bold mb-0 fs-2">Prihláste sa do svojho zákazníckeho účtu.</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
 
+                        <button id="modalCloseButton" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    </div>
+                    <h6 style="color: red; display: none; align-self: center" id="upozornenie-kosik" >Pre pridanie tovaru do košíka sa musíte prihlásiť.</h6>
                     <div class="modal-body p-5 pt-0">
                         <form class="form-signin" method="post" action="<?= \App\Config\Configuration::LOGIN_URL ?>">
                             <div class="form-floating mb-3">
@@ -193,8 +199,8 @@ if ($isPost) {
                         <h5>Prihlásiť na odber newslettera</h5>
                         <p>Najnovšie produkty priamo na váš email.</p>
                         <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                            <label for="email newsletter1" class="visually-hidden">Emailová adresa</label>
-                            <input id="email newsletter1" name="email" type="email" class="form-control" placeholder="Emailová adresa" value="<?=getParam("email")?>">
+                            <label for="email-newsletter1" class="visually-hidden">Emailová adresa</label>
+                            <input id="email-newsletter1" name="email" type="email" class="form-control" placeholder="Emailová adresa" value="<?=getParam("email")?>">
                             <button class="btn btn-primary button-style" type="submit">Odoberať</button>
                         </div>
                     </form>

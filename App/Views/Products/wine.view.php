@@ -6,9 +6,9 @@ use App\Models\Product;
 ?>
 
 <div class="container-text">
-    <img class="img-fluid titulka" src="/public/images/pictures/prosecco-main.jpg" alt="Prosecco v pohároch" >
+    <img class="img-fluid titulka" src="/public/images/pictures/zan-WrueFKpTlQs-unsplash.jpg" alt="Víno v pohároch" >
     <div class="text-nowrap middle-text">
-        Prosecco.
+        Víno.
     </div>
 </div>
 <div class="px-2 pt-2 my-5 pb-3 text-center border-bottom">

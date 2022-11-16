@@ -1,12 +1,12 @@
 <?php
 use App\Models\Product;
 /** @var Array $data */
-/** @var \App\Models\Product $product */
+/** @var Product $product */
 
 ?>
 
 <div class="container-text">
-    <img class="img-fluid titulka" src="/public/images/pictures/prosecco-main.jpg" alt="Prosecco v pohároch" >
+    <img class="img-fluid titulka" src="/public/images/pictures/prosecco-main.jpg" alt="Víno na kopci" >
     <div class="text-nowrap middle-text">
         Prosecco.
     </div>
@@ -18,8 +18,9 @@ use App\Models\Product;
                 <h1 class="display-6 ">Filtre</h1>
                 <h5 class="">Tu budú filtre</h5>
             </div>
+
             <div class="col-sm-10">
-                <div class="album py-5 px-2  bg-light">
+                <div class="album py-5 px-2 bg-light">
                     <div class="container row row-cols-1 row-cols-md-3 g-6 px-5 pt-2">
                         <?php foreach ($data['data'] as $product) {?>
 
