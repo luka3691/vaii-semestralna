@@ -29,9 +29,9 @@ if ($isPost) {
                 $newsletter = new \App\Models\Newsletter();
                 $newsletter->setEmail($email);
                 $newsletter->setConfirmed(0);
-                $newsletter->setOrderUpdate(0);
-                $newsletter->setNewProduct(0);
-                $newsletter->setSaleAlert(0);
+                $newsletter->setOrderUpdate(1);
+                $newsletter->setNewProduct(1);
+                $newsletter->setSaleAlert(1);
                 $newsletter->save();
             } else {
                 $errors['email'] = "Emailová adresa je už prihlásená na odber.";
@@ -48,9 +48,7 @@ if ($isPost) {
     <title><?= \App\Config\Configuration::APP_NAME ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-            crossorigin="anonymous"></script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
@@ -65,7 +63,6 @@ if ($isPost) {
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="?c=products&a=prosecco">Prosecco</a>
@@ -222,6 +219,5 @@ if ($isPost) {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-
 </body>
 </html>

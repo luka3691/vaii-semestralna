@@ -83,27 +83,27 @@ if ($isPost) {
                             <input id="email newsletter2" name="email2" type="email" class="form-control" placeholder="Emailová adresa" value="<?=getParam("email2")?>">
                         </div>
                         <?=printErrorMessage($errors, "email")?>
-                        <h6>Vyberte si temy, ktore vam budu chodit na email.</h6>
+                        <h6>Vyberte si témy, ktoré vám budú chodiť na email.</h6>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="gridCheck1" name="gridCheck1" value="true" checked>
                             <label class="form-check-label" for="gridCheck1">
-                                Informacie ohladom objednavky
+                                Informácie ohľadom objednávky
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="gridCheck2" value="true" name="gridCheck2" checked>
                             <label class="form-check-label" for="gridCheck2">
-                                Upozornenia na nove produkty
+                                Upozornenia na nové produkty
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="gridCheck3" value="true" name="gridCheck3" checked>
                             <label class="form-check-label" for="gridCheck3">
-                                Upozornenia na zlavy
+                                Upozornenia na zľavy
                             </label>
                         </div>
-                        <div class="text-center">
-                            <button class="btn btn-primary button-style" type="submit" name="submit" >Upravit preferncie</button>
+                        <div class="text-center pt-2">
+                            <button class="btn btn-primary button-style" type="submit" name="submit" >Upraviť preferncie</button>
                         </div>
                     </form>
                 </div>
@@ -114,7 +114,7 @@ if ($isPost) {
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-delete my-5">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Zadajte email pre odhlasenie sa z newslettera.</h5>
+                    <h5 class="card-title text-center">Zadajte email pre odhlásenie sa z newslettera.</h5>
                     <div class="text-center text-danger mb-3">
                         <?= @$data['message'] ?>
                     </div>
@@ -126,7 +126,7 @@ if ($isPost) {
                         <?=printErrorMessage($errors, "email")?>
 
                         <div class="text-center">
-                            <button class="btn btn-primary button-style" type="submit" name="delete" >Odhlasit</button>
+                            <button class="btn btn-primary button-style" type="submit" name="delete" >Odhlásiť</button>
                         </div>
                     </form>
                 </div>
@@ -134,8 +134,8 @@ if ($isPost) {
         </div>
     </div>
     <?php } ?>
-    <div class="text-center">
-        <a class="nav-link" href="?c=home"><button class="btn btn-primary button-style" type="button" name="return" >Vratit sa spat</button></a>
+    <div class="text-center pt-2 pb-2">
+        <a class="nav-link" href="?c=home"><button class="btn btn-primary button-style" type="button" name="return" >Vrátiť sa späť</button></a>
     </div>
 
 
