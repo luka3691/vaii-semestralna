@@ -85,9 +85,19 @@ if ($isPost) {
                 </form>
                 <div class="text-end ps-2">
                     <?php if ($auth->isLogged()) { ?>
-                        <a class="nav-link" href="?c=auth&a=logout"><button type="submit" class="btn btn-outline-primary me-2 login-button"  >Odhlásiť sa</button></a>
+
+                        <button class="btn btn-outline-primary me-2 login-button" onclick="window.location.href='?c=auth&a=logout';">
+                            Odhlásiť sa
+                        </button>
+
+
+
                     <?php } else { ?>
-                        <button id="loginModalTrigger" type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal" >Prihlásiť sa</button>
+                        <form>
+                            <input id="loginModalTrigger" type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal" value="Prihlásiť sa" />
+                        </form>
+                        <!-- <button id="loginModalTrigger" type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal" >Prihlásiť sa</button> -->
+
                     <?php } ?>
 
                 </div>
@@ -119,6 +129,7 @@ if ($isPost) {
 
 <div>
     <?php if ($auth->isLogged()) { ?>
+<!--
         <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -128,7 +139,7 @@ if ($isPost) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     <?php } else { ?>
         <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">

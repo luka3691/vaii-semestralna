@@ -79,8 +79,8 @@ if ($isPost) {
                     </div>
                     <form class="form-signin" method="POST" action="<?= "?c=auth&a=newsletter" ?>">
                         <div class="form-label-group mb-3" >
-                            <label for="email newsletter2" class="visually-hidden">Emailová adresa</label>
-                            <input id="email newsletter2" name="email2" type="email" class="form-control" placeholder="Emailová adresa" value="<?=getParam("email2")?>">
+                            <label for="emailnewsletter2" class="visually-hidden">Emailová adresa</label>
+                            <input id="emailnewsletter2" name="email2" type="email" class="form-control" placeholder="Emailová adresa" value="<?=getParam("email2")?>">
                         </div>
                         <?=printErrorMessage($errors, "email")?>
                         <h6>Vyberte si témy, ktoré vám budú chodiť na email.</h6>
@@ -120,8 +120,8 @@ if ($isPost) {
                     </div>
                     <form class="form-delete" method="post" action="<?= "?c=auth&a=newsletter" ?>">
                         <div class="form-label-group mb-3" >
-                            <label for="email newsletter3" class="visually-hidden">Emailová adresa</label>
-                            <input id="email newsletter3" name="email3" type="email" class="form-control" placeholder="Emailová adresa" value="<?=getParam("email3")?>">
+                            <label for="emailnewsletter3" class="visually-hidden">Emailová adresa</label>
+                            <input id="emailnewsletter3" name="email3" type="email" class="form-control" placeholder="Emailová adresa" value="<?=getParam("email3")?>">
                         </div>
                         <?=printErrorMessage($errors, "email")?>
 
@@ -134,8 +134,10 @@ if ($isPost) {
         </div>
     </div>
     <?php } ?>
-    <div class="text-center pt-2 pb-2">
-        <a class="nav-link" href="?c=home"><button class="btn btn-primary button-style" type="button" name="return" >Vrátiť sa späť</button></a>
+
+    <div class="text-center"><button class="btn btn-primary button-style text-center pt-2 pb-2" onclick="window.location.href='?c=home';">
+            Vrátiť sa späť
+        </button>
     </div>
 
 
