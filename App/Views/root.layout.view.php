@@ -1,7 +1,7 @@
 <?php
 /** @var string $contentHTML */
 /** @var \App\Core\IAuthenticator $auth */
-/** @var \App\Core\IValidityChecker $valid */
+/** @var \App\Core\IValidityChecker $validator */
 
 ?>
 <!DOCTYPE html>
@@ -43,7 +43,7 @@
             </ul>
             <div class="d-flex justify-content-center">
                 <form method="POST" class="d-flex" role="search">
-                    <input class="form-control me-2 flex" name="search" type="search" placeholder="Hľadanie v obchode..." aria-label="Search" value="<?=$valid->getParam("search")?>">
+                    <input class="form-control me-2 flex" name="search" type="search" placeholder="Hľadanie v obchode..." aria-label="Search" value="<?=$validator->getParam("search")?>">
                     <button class="btn button-style disabled" type="submit">Hľadať</button>
 
                 </form>
@@ -163,7 +163,7 @@
             <div class="col-md-5 offset-md-1 mb-3">
                 <?php
                 $errors = [];
-                if (!$valid->newsletterSignUp($errors)) {
+                if ($validator->newsletterSignUp($errors)) {
                     ?>
                     <h5>Ďakujeme za odber!</h5>
                     <?php
@@ -174,11 +174,11 @@
                         <p>Najnovšie produkty priamo na váš email.</p>
                         <div class="d-flex flex-column flex-sm-row w-100 gap-2">
                             <label for="email-newsletter1" class="visually-hidden">Emailová adresa</label>
-                            <input id="email-newsletter1" name="email" type="email" class="form-control" placeholder="Emailová adresa" value="<?=getParam("email")?>">
+                            <input id="email-newsletter1" name="email" type="email" class="form-control" placeholder="Emailová adresa" value="<?=$validator->getParam("email")?>">
                             <button class="btn btn-primary button-style" type="submit">Odoberať</button>
                         </div>
                     </form>
-                    <?=$valid->printErrorMessage($errors, "email")?>
+                    <?=$validator->printErrorMessage($errors, "email")?>
                     <a class="nav-link" href="?c=auth&a=newsletter">Pokiaľ sa chcete odlásiť z newslettera, kliknite sem.</a>
                 <?php } ?>
             </div>

@@ -6,6 +6,10 @@ use App\Core\IValidityChecker;
 
 class ValidityChecker implements IValidityChecker
 {
+    public function __construct() {
+        //session_start();
+    }
+
     function getParam($name): string|null
     {
         return isset($_POST[$name]) ? htmlspecialchars(trim($_POST[$name]), ENT_QUOTES) : null;

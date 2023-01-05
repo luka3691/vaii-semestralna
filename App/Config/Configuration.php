@@ -3,6 +3,7 @@
 namespace App\Config;
 
 use App\Auth\Authenticator;
+use App\Auth\ValidityChecker;
 
 /**
  * Class Configuration
@@ -27,4 +28,5 @@ class Configuration
     public const DEBUG_QUERY = false;
 
     public const AUTH_CLASS = Authenticator::class;
+    public const VALIDATOR_CLASS = ValidityChecker::class;
 }

@@ -29,6 +29,7 @@ class App
     private Request $request;
 
     private ?IAuthenticator $auth;
+    private ?IValidityChecker $validityChecker;
 
     /**
      * App constructor
@@ -42,8 +43,15 @@ class App
         if (defined('\\App\\Config\\Configuration::AUTH_CLASS')) {
             //$authClass = Configuration::AUTH_CLASS;
             $this->auth = new (Configuration::AUTH_CLASS)();
-        } else {
+        }else {
             $this->auth = null;
+
+        }
+        if (defined('\\App\\Config\\Configuration::VALIDATOR_CLASS')) {
+            //$authClass = Configuration::AUTH_CLASS;
+            $this->validityChecker = new (Configuration::VALIDATOR_CLASS)();
+        } else {
+            $this->validityChecker = null;
         }
     }
 
@@ -111,5 +119,11 @@ class App
     {
         return $this->auth;
     }
-
+    /**
+     * @return IValidityChecker|null
+     */
+    public function getValidator(): ?IValidityChecker
+    {
+        return $this->validityChecker;
+    }
 }
