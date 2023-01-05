@@ -1,44 +1,8 @@
 <?php
 /** @var string $contentHTML */
 /** @var \App\Core\IAuthenticator $auth */
+/** @var \App\Core\IValidityChecker $valid */
 
-function getParam($name): string|null
-{
-    return isset($_POST[$name]) ? htmlspecialchars(trim($_POST[$name]), ENT_QUOTES) : null;
-}
-
-function printErrorMessage($errors, $key): string
-{
-    if (isset($errors[$key])) {
-        return "<h5 class='form-error' style='color: red'>{$errors[$key]}</h5>";
-    }
-    return "";
-}
-
-$errors = [];
-$isPost = $_SERVER['REQUEST_METHOD'] == "POST";
-if ($isPost) {
-    $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-    if (!$email) {
-        $errors['email'] = "Emailová adresa nie je platná.";
-    } else {
-
-        if (empty($errors)) {
-            $exists = \App\Models\Newsletter::getAll("email = ?", [$email]);
-            if (count($exists) == 0) {
-                $newsletter = new \App\Models\Newsletter();
-                $newsletter->setEmail($email);
-                $newsletter->setConfirmed(0);
-                $newsletter->setOrderUpdate(1);
-                $newsletter->setNewProduct(1);
-                $newsletter->setSaleAlert(1);
-                $newsletter->save();
-            } else {
-                $errors['email'] = "Emailová adresa je už prihlásená na odber.";
-            }
-        }
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="sk">
@@ -79,7 +43,7 @@ if ($isPost) {
             </ul>
             <div class="d-flex justify-content-center">
                 <form method="POST" class="d-flex" role="search">
-                    <input class="form-control me-2 flex" name="search" type="search" placeholder="Hľadanie v obchode..." aria-label="Search" value="<?=getParam("search")?>">
+                    <input class="form-control me-2 flex" name="search" type="search" placeholder="Hľadanie v obchode..." aria-label="Search" value="<?=$valid->getParam("search")?>">
                     <button class="btn button-style disabled" type="submit">Hľadať</button>
 
                 </form>
@@ -197,10 +161,12 @@ if ($isPost) {
             </div>
 
             <div class="col-md-5 offset-md-1 mb-3">
-                <?php if ($isPost && empty($errors)) {
-                ?>
-                    <h5>Ďakujeme za odber!</h5>
                 <?php
+                $errors = [];
+                if (!$valid->newsletterSignUp($errors)) {
+                    ?>
+                    <h5>Ďakujeme za odber!</h5>
+                    <?php
                 }
                 else { ?>
                     <form method="POST">
@@ -212,7 +178,7 @@ if ($isPost) {
                             <button class="btn btn-primary button-style" type="submit">Odoberať</button>
                         </div>
                     </form>
-                    <?=printErrorMessage($errors, "email")?>
+                    <?=$valid->printErrorMessage($errors, "email")?>
                     <a class="nav-link" href="?c=auth&a=newsletter">Pokiaľ sa chcete odlásiť z newslettera, kliknite sem.</a>
                 <?php } ?>
             </div>

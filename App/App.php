@@ -5,6 +5,7 @@ namespace App;
 use App\Config\Configuration;
 use App\Core\IAuthenticator;
 use App\Core\DB\Connection;
+use App\Core\IValidityChecker;
 use App\Core\Request;
 use App\Core\Responses\RedirectResponse;
 use App\Core\Responses\Response;
@@ -110,4 +111,5 @@ class App
     {
         return $this->auth;
     }
+
 }
