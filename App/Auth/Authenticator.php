@@ -3,13 +3,14 @@
 namespace App\Auth;
 
 use App\Core\IAuthenticator;
+use App\Models\User;
 
 /**
  * Class DummyAuthenticator
  * Basic implementation of user authentication
  * @package App\Auth
  */
-class DummyAuthenticator implements IAuthenticator
+class Authenticator implements IAuthenticator
 {
     const LOGIN = "admin";
     const PASSWORD_HASH = '$2y$10$GRA8D27bvZZw8b85CAwRee9NH5nj4CQA6PDFMc90pN9Wi4VAWq3yq'; // admin
@@ -32,6 +33,11 @@ class DummyAuthenticator implements IAuthenticator
      */
     function login($login, $password): bool
     {
+        $testUser = Users::getOne($login);
+        if ($testUser === null) {
+            return false;
+        }
+
         if ($login == self::LOGIN && password_verify($password, self::PASSWORD_HASH)) {
             $_SESSION['user'] = self::USERNAME;
             return true;
@@ -86,5 +92,27 @@ class DummyAuthenticator implements IAuthenticator
     function getLoggedUserId(): mixed
     {
         return $_SESSION['user'];
+    }
+
+    function register($id, $email, $password) :bool {
+        $existingUser = User::getOne($id);
+        if ($existingUser !== null) {
+            return false;
+        }
+        $existingUser = User::getOne($email);
+        if ($existingUser !== null) {
+            return false;
+        }
+
+        $tmpUser = new User();
+        $tmpUser->setEmail($email);
+        $tmpUser->setId($id);
+        $tmpUser->setPassword($this->hashing($password));
+        $tmpUser->create();
+        return true;
+    }
+
+    function hashing($password): string {
+        return password_hash($password, PASSWORD_DEFAULT);
     }
 }

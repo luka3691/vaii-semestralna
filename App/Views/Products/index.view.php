@@ -9,7 +9,7 @@ use App\Models\Product;
 <div class="container-text">
     <img class="img-fluid titulka" src="/public/images/pictures/prosecco-main.jpg" alt="Víno na kopci" >
     <div class="text-nowrap middle-text">
-        Prosecco.
+        Originálne talianske produkty.
     </div>
 </div>
 <div class="px-2 pt-2 my-5 pb-3 text-center border-bottom">

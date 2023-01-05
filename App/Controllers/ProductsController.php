@@ -89,7 +89,7 @@ class ProductsController extends AControllerBase {
     {
 
         return $this->html([
-            Product::getAll()
+            //Product::getOne()
         ]);
 
     }

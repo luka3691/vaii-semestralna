@@ -4,8 +4,9 @@ namespace App\Models;
 
 use App\Core\Model;
 
-class LoginInformation extends Model
+class User extends Model
 {
+    protected $id;
     protected $email;
     protected $password;
 
@@ -39,6 +40,22 @@ class LoginInformation extends Model
     public function setPassword($password): void
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
 
