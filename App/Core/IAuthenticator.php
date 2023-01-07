@@ -46,4 +46,5 @@ interface IAuthenticator
      * @return bool
      */
     function isLogged(): bool;
+    function register( $email, $password) :bool;
 }

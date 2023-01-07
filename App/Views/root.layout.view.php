@@ -59,6 +59,7 @@
                     <?php } else { ?>
                         <form>
                             <input id="loginModalTrigger" type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal" value="Prihlásiť sa" />
+                            <input id="registerModalTrigger" type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#registerModal" data-bs-toggle="modal" value="Zaregistrovať sa" />
                         </form>
                         <!-- <button id="loginModalTrigger" type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal" >Prihlásiť sa</button> -->
 
@@ -124,6 +125,32 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <input name="password" type="password" class="form-control rounded-3 text-bg-light" id="password" placeholder="Heslo" required>
+                                <label class="text-black" for="password">Heslo</label>
+                            </div>
+                            <button class="w-100 mb-2 btn btn-lg elegant-button" name="submit" type="submit">Prihlásiť sa</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-4 shadow">
+                    <div class="modal-header p-5 pb-4 border-bottom-0">
+                        <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
+                        <h1 class="fw-bold mb-0 fs-2">Zaregistrujte sa!</h1>
+                        <button id="modalCloseButton" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    </div>
+                    <div class="modal-body p-5 pt-0">
+                        <form class="form-register" method="post" action="<?= \App\Config\Configuration::REGISTER_URL ?>">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="login" class="form-control rounded-3 text-bg-light " id="login" placeholder="name@example.com" required>
+                                <label class="text-black" for="login">Email</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input name="password" type="password" class="form-control rounded-3 text-bg-light" id="password" placeholder="Heslo má mať minimálne 6 a maximálne 20 znakov." required>
                                 <label class="text-black" for="password">Heslo</label>
                             </div>
                             <button class="w-100 mb-2 btn btn-lg elegant-button" name="submit" type="submit">Prihlásiť sa</button>

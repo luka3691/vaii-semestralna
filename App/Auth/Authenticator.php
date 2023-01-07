@@ -33,13 +33,13 @@ class Authenticator implements IAuthenticator
      */
     function login($login, $password): bool
     {
-        $testUser = Users::getOne($login);
-        if ($testUser === null) {
+        $testUser = User::getAll("email = ?", [$login]);
+        if ($testUser[0] === null) {
             return false;
         }
 
-        if ($login == self::LOGIN && password_verify($password, self::PASSWORD_HASH)) {
-            $_SESSION['user'] = self::USERNAME;
+        if (password_verify($password, $testUser[0]->getPassword())) {
+            $_SESSION['user'] = $login;
             return true;
         } else {
             return false;
@@ -94,11 +94,8 @@ class Authenticator implements IAuthenticator
         return $_SESSION['user'];
     }
 
-    function register($id, $email, $password) :bool {
-        $existingUser = User::getOne($id);
-        if ($existingUser !== null) {
-            return false;
-        }
+    function register($email, $password) :bool {
+
         $existingUser = User::getOne($email);
         if ($existingUser !== null) {
             return false;
@@ -106,9 +103,8 @@ class Authenticator implements IAuthenticator
 
         $tmpUser = new User();
         $tmpUser->setEmail($email);
-        $tmpUser->setId($id);
         $tmpUser->setPassword($this->hashing($password));
-        $tmpUser->create();
+        $tmpUser->save();
         return true;
     }
 
