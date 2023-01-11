@@ -10,7 +10,7 @@ class ApiController extends AControllerBase
 {
     public function index(): Response
     {
-        ;
+        return $this->html();
     }
 
     public function getAll(): string

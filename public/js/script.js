@@ -1,4 +1,5 @@
- function addedToCartAnimation() {
+
+async function addedToCartAnimation() {
 
     showCheckCart();
      let timeleft = 1;
@@ -15,8 +16,12 @@ function addToCart() {
     let workingCartButtons = document.getElementsByClassName("add-to-cart-working");
     for (let i = 0; i < workingCartButtons.length; i++) {
         let theButton = workingCartButtons[i];
-        theButton.onclick  = addedToCartAnimation;
+        theButton.addEventListener("click", addedToCartAnimation);
+        theButton.addEventListener("click", function () {
+                cartAction("help", theButton.id);
+        });
     }
+
     let blockedCartButtons = document.getElementsByClassName("add-to-cart-blocked");
     for (let i = 0; i < blockedCartButtons.length; i++) {
         let theButton = blockedCartButtons[i];
@@ -24,6 +29,49 @@ function addToCart() {
     }
 
 }
+
+async function cartAction(action, product_code) {
+     try {
+         var product = product_code.slice(4);
+         console.log(product);
+         var details = {
+             'code': product
+         };
+
+         var formBody = [];
+         for (var property in details) {
+             var encodedKey = encodeURIComponent(property);
+             var encodedValue = encodeURIComponent(details[property]);
+             formBody.push(encodedKey + "=" + encodedValue);
+         }
+         //formBody = formBody.join("&");
+
+         console.log("HEllo");
+         let response = await fetch(
+             "?c=cart&a=addToCart",
+             {
+                 headers: {
+                     'Content-Type': 'application/x-www-form-urlencoded',
+                      //'Content-Type': 'application/json'
+                 },
+                 method: "POST",
+                 body: details
+                 //body: JSON.stringify({
+                  //   "code" : "4"})
+             });
+
+         //const data = await response.json();
+         console.log(product_code);
+         if (response.status != 204) {
+             throw new Error("ERROR:" + response.status + " " + response.statusText);
+         }
+
+     } catch (err) {
+         console.log('Request Failed', err);
+     }
+ }
+
+
 
 function showCheckCart() {
     document.getElementById('cart-no-plus').setAttribute("height", "0");

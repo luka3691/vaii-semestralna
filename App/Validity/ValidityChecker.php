@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Auth;
+namespace App\Validity;
 
-use App\Core\IAuthenticator;
 use App\Core\IValidityChecker;
 
 class ValidityChecker implements IValidityChecker
@@ -116,22 +115,7 @@ class ValidityChecker implements IValidityChecker
 
             } else {
 
-                if (empty($errors)) {
-                    $exists = \App\Models\User::getAll("email = ?", [$email]);
-                    if (count($exists) == 0) {
-                        $newUser = new \App\Models\User();
-                        $newUser->setEmail($email);
-                        $newUser->setPassword();
-                        $newUser->setOrderUpdate(1);
-                        $newUser->setNewProduct(1);
-                        $newUser->setSaleAlert(1);
-                        $newUser->save();
-                        return true;
-                    } else {
-                        $errors['email'] = "Emailová adresa je už zaregistrovana.";
-                        return false;
-                    }
-                }
+
             }
         }
         return false;

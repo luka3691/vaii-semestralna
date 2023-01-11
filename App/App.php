@@ -5,6 +5,7 @@ namespace App;
 use App\Config\Configuration;
 use App\Core\IAuthenticator;
 use App\Core\DB\Connection;
+use App\Core\ICartManipulator;
 use App\Core\IValidityChecker;
 use App\Core\Request;
 use App\Core\Responses\RedirectResponse;
@@ -30,6 +31,7 @@ class App
 
     private ?IAuthenticator $auth;
     private ?IValidityChecker $validityChecker;
+    private ?ICartManipulator $cartManipulator;
 
     /**
      * App constructor
@@ -125,5 +127,11 @@ class App
     public function getValidator(): ?IValidityChecker
     {
         return $this->validityChecker;
+    }
+    /**
+     * @return ICartManipulator|null
+     */
+    public function getCartManipulator() : ?ICartManipulator {
+        return $this->cartManipulator;
     }
 }

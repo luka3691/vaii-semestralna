@@ -1,5 +1,5 @@
 <div class="container-text">
-    <img class="img-fluid titulka" src="public/images/pictures/about-section.jpg" alt="Víno v horách" >
+    <img class="img-fluid titulka" src="/public/images/pictures/about-section.jpg" alt="Víno v horách" >
     <div class="text-nowrap middle-text">
         O našej firme.
     </div>
@@ -9,7 +9,7 @@
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-4 middle-picture">
-                <img class="img-fluid " src="public/images/pictures/wine-tasting.jpg" alt="Ochutnávka vína">
+                <img class="img-fluid " src="/public/images/pictures/wine-tasting.jpg" alt="Ochutnávka vína">
             </div>
             <div class="col-sm-8">
                 <div class="col-md-11 mx-auto">
@@ -38,7 +38,7 @@
             </div>
 
             <div class="col-sm-4 middle-picture">
-                <img class="img-fluid " src="public/images/pictures/nas-tim.jpg" alt="Náš tím">
+                <img class="img-fluid " src="/public/images/pictures/nas-tim.jpg" alt="Náš tím">
             </div>
 
         </div>
@@ -48,13 +48,13 @@
 <div id="carouselLogo" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="5000">
-            <img class="d-block w-15 logo-carousel" src="public/images/pictures/bedin-logo.png" alt="First slide">
+            <img class="d-block w-15 logo-carousel" src="/public/images/pictures/bedin-logo.png" alt="First slide">
         </div>
         <div class="carousel-item "  data-bs-interval="5000">
-            <img class="d-block w-15 logo-carousel" src="public/images/pictures/italo-cescon-logo.png" alt="Second slide">
+            <img class="d-block w-15 logo-carousel" src="/public/images/pictures/italo-cescon-logo.png" alt="Second slide">
         </div>
         <div class="carousel-item "  data-bs-interval="5000">
-            <img class="d-block w-15 logo-carousel" src="public/images/pictures/perlago-logo.png" alt="Third slide">
+            <img class="d-block w-15 logo-carousel" src="/public/images/pictures/perlago-logo.png" alt="Third slide">
         </div>
     </div>
 </div>

@@ -3,6 +3,7 @@
 namespace App\Auth;
 
 use App\Core\IAuthenticator;
+use App\Models\Cart;
 use App\Models\User;
 
 /**
@@ -96,8 +97,8 @@ class Authenticator implements IAuthenticator
 
     function register($email, $password) :bool {
 
-        $existingUser = User::getOne($email);
-        if ($existingUser !== null) {
+        $existingUser = User::getAll("email = ?", [$email]);
+        if ($existingUser[0] !== null) {
             return false;
         }
 
@@ -105,10 +106,15 @@ class Authenticator implements IAuthenticator
         $tmpUser->setEmail($email);
         $tmpUser->setPassword($this->hashing($password));
         $tmpUser->save();
+        $tmpCart = new Cart();
+        $tmpCart->setUserId($tmpUser->getId());
+        $tmpCart->save();
+        //$this->createCart($email);
         return true;
     }
 
     function hashing($password): string {
         return password_hash($password, PASSWORD_DEFAULT);
     }
+
 }

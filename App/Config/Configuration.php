@@ -3,7 +3,7 @@
 namespace App\Config;
 
 use App\Auth\Authenticator;
-use App\Auth\ValidityChecker;
+use App\Validity\ValidityChecker;
 
 /**
  * Class Configuration
