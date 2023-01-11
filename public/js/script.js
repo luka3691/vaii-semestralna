@@ -44,7 +44,7 @@ async function cartAction(action, product_code) {
              var encodedValue = encodeURIComponent(details[property]);
              formBody.push(encodedKey + "=" + encodedValue);
          }
-         //formBody = formBody.join("&");
+         formBody = formBody.join("&");
 
          console.log("HEllo");
          let response = await fetch(
@@ -52,17 +52,14 @@ async function cartAction(action, product_code) {
              {
                  headers: {
                      'Content-Type': 'application/x-www-form-urlencoded',
-                      //'Content-Type': 'application/json'
                  },
                  method: "POST",
-                 body: details
-                 //body: JSON.stringify({
-                  //   "code" : "4"})
+                 body: formBody
              });
 
          //const data = await response.json();
          console.log(product_code);
-         if (response.status != 204) {
+         if (response.status != 200) {
              throw new Error("ERROR:" + response.status + " " + response.statusText);
          }
 

@@ -32,14 +32,15 @@ class CartController extends AControllerBase
      */
     public function addToCart() : Response
     {
-        //$formData = $this->app->getRequest()->getPost();
+        $formData = $this->app->getRequest()->getValue("code");
         //$cisielko = $formData['code'];
+
         $tmpCartItem = new Cart_item();
         $users = User::getAll("email = ?", [$this->app->getAuth()->getLoggedUserName()]);
         $existingCart = Cart::getAll("user_id = ?", [$users[0]->getId()]);
         $tmpCartItem->setCartUserId($existingCart[0]->getId());
         //$tmpCartItem->setProductId(sizeof($formData));
-        $tmpCartItem->setProductId(4);
+        $tmpCartItem->setProductId($formData);
         $tmpCartItem->setQuantity(1);
         $tmpCartItem->save();
         http_response_code(204);
