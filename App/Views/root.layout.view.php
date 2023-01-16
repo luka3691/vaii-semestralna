@@ -43,11 +43,13 @@
                 </li>
             </ul>
             <div class="d-flex justify-content-center">
+                <!--
                 <form method="POST" class="d-flex" role="search">
                     <input class="form-control me-2 flex" name="search" type="search" placeholder="Hľadanie v obchode..." aria-label="Search" value="<?=$validator->getParam("search")?>">
                     <button class="btn button-style disabled" type="submit">Hľadať</button>
 
                 </form>
+                -->
                 <div class="text-end ps-2">
                     <?php if ($auth->isLogged()) { ?>
 

@@ -66,14 +66,8 @@ class CartController extends AControllerBase
     public function takeFromCart() : Response
     {
         $formData = $this->app->getRequest()->getValue("code");
-        //$cisielko = $formData['code'];
-
         $existingProductInCart = Cart_item::getOne($formData);
-
-
-        if ($existingProductInCart == null) {
-
-        } else if ($existingProductInCart->getQuantity() == 1) {
+        if ($existingProductInCart->getQuantity() == 1) {
             //$po
             //cetProduktov = intval($existingProductInCart[0]->getQuantity()) + 1;
             $existingProductInCart->delete();
@@ -82,11 +76,12 @@ class CartController extends AControllerBase
 
             $existingProductInCart->setQuantity($tmpQuantity);
             $existingProductInCart->save();
+            //$response = new JsonResponse($tmpQuantity);
             echo json_encode($tmpQuantity);
+            //return $response;
         }
-
-
         http_response_code(204);
+
     }
     /**
      * Register a user
@@ -96,36 +91,19 @@ class CartController extends AControllerBase
     public function raiseFromCart() : Response
     {
         $formData = $this->app->getRequest()->getValue("code");
-        //$cisielko = $formData['code'];
-
         $existingProductInCart = Cart_item::getOne($formData);
-
-
         if ($existingProductInCart == null) {
 
         } else {
-            //$tmpQuantity = $existingProductInCart->getQuantity() + 1;
+            $tmpQuantity = $existingProductInCart->getQuantity() + 1;
 
-            $existingProductInCart->setQuantity(3);
+            $existingProductInCart->setQuantity($tmpQuantity);
             $existingProductInCart->save();
-            echo json_encode(3);
+            echo json_encode($tmpQuantity);
         }
 
 
         http_response_code(204);
-        /*
-        $existingCartItem = Cart_item::getAll("cart_id = ? product_id = ?", [Cart::getOne($_SESSION['user']), $_POST['code']]);
-        if ($existingCartItem[0] == null) {
-            $tmpCartItem = new Cart_item();
-            $tmpCartItem->setCartId(Cart::getOne($_SESSION['user'])->getId());
-            $tmpCartItem->setProductId($_POST['code']);
-            $tmpCartItem->save();
-            http_response_code(204);
-        } else {
-            //$this->updateQuantity($existingCartItem[0]->getProductId(), $existingCartItem[0]->getQuantity() + 1);
-            throw new Exception("Invalid API call", 400);
-        }
-        */
 
     }
 
@@ -150,7 +128,8 @@ class CartController extends AControllerBase
                 'cart_user_id' => $product->getCartUserId(),
                 'product_id' => $product->getProductId(),
                 'quantity' => $product->getQuantity(),
-                'name' => Product::getOne($product->getProductId())->getName()
+                'name' => Product::getOne($product->getProductId())->getName(),
+                'price' => Product::getOne($product->getProductId())->getPrice()
             ];
         }
 
