@@ -3,9 +3,11 @@
 namespace App\Controllers;
 
 use App\Core\AControllerBase;
+use App\Core\Responses\JsonResponse;
 use App\Core\Responses\Response;
 use App\Models\Cart;
 use App\Models\Cart_item;
+use App\Models\Product;
 use App\Models\User;
 
 class CartController extends AControllerBase
@@ -54,20 +56,7 @@ class CartController extends AControllerBase
            $tmpCartItem->save();
         }
         http_response_code(204);
-        /*
-        $existingCartItem = Cart_item::getAll("cart_id = ? product_id = ?", [Cart::getOne($_SESSION['user']), $_POST['code']]);
-        if ($existingCartItem[0] == null) {
-            $tmpCartItem = new Cart_item();
-            $tmpCartItem->setCartId(Cart::getOne($_SESSION['user'])->getId());
-            $tmpCartItem->setProductId($_POST['code']);
-            $tmpCartItem->save();
-            http_response_code(204);
-        } else {
-            //$this->updateQuantity($existingCartItem[0]->getProductId(), $existingCartItem[0]->getQuantity() + 1);
-            throw new Exception("Invalid API call", 400);
-        }
-        */
-
+       return new JsonResponse(2);
     }
     /**
      * Register a user
@@ -98,20 +87,6 @@ class CartController extends AControllerBase
 
 
         http_response_code(204);
-        /*
-        $existingCartItem = Cart_item::getAll("cart_id = ? product_id = ?", [Cart::getOne($_SESSION['user']), $_POST['code']]);
-        if ($existingCartItem[0] == null) {
-            $tmpCartItem = new Cart_item();
-            $tmpCartItem->setCartId(Cart::getOne($_SESSION['user'])->getId());
-            $tmpCartItem->setProductId($_POST['code']);
-            $tmpCartItem->save();
-            http_response_code(204);
-        } else {
-            //$this->updateQuantity($existingCartItem[0]->getProductId(), $existingCartItem[0]->getQuantity() + 1);
-            throw new Exception("Invalid API call", 400);
-        }
-        */
-
     }
     /**
      * Register a user
@@ -129,11 +104,11 @@ class CartController extends AControllerBase
         if ($existingProductInCart == null) {
 
         } else {
-            $tmpQuantity = $existingProductInCart->getQuantity() + 1;
+            //$tmpQuantity = $existingProductInCart->getQuantity() + 1;
 
-            $existingProductInCart->setQuantity(1);
+            $existingProductInCart->setQuantity(3);
             $existingProductInCart->save();
-            echo json_encode($tmpQuantity);
+            echo json_encode(3);
         }
 
 
@@ -153,4 +128,35 @@ class CartController extends AControllerBase
         */
 
     }
+
+    /**
+     * Register a user
+     * @return \App\Core\Responses\JsonResponse
+     *  @throws \Exception
+     */
+
+    public function getCartItems() : JsonResponse
+    {
+        $users = User::getAll("email = ?", [$this->app->getAuth()->getLoggedUserName()]);
+        $existingCart = Cart::getAll("user_id = ?", [$users[0]->getId()]);
+        //$existingProductInCart = Cart_item::getAll("cart_id = ? product_id = ?", [$existingCart[0], $formData]);
+        $existingProductInCart = Cart_item::getAll("cart_user_id = ?", [$existingCart[0]->getId()]);
+
+        $data = [];
+
+        foreach ($existingProductInCart as $product) {
+            $data[] = [
+                'id' => $product->getId(),
+                'cart_user_id' => $product->getCartUserId(),
+                'product_id' => $product->getProductId(),
+                'quantity' => $product->getQuantity(),
+                'name' => Product::getOne($product->getProductId())->getName()
+            ];
+        }
+
+        $response = new JsonResponse(array_values($data));
+        //$response->generate();
+        return $response;
+    }
+
 }

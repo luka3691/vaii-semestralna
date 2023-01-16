@@ -21,6 +21,7 @@ function editCart() {
         let theButton = addQuantityButton[i];
         theButton.addEventListener("click", function () {
             cartAction("raise", theButton.id);
+            listItems();
         });
     }
     let takeQuantityButton = document.getElementsByClassName("take-quantity-button");
@@ -28,6 +29,7 @@ function editCart() {
         let theButton = takeQuantityButton[i];
         theButton.addEventListener("click", function () {
             cartAction("take", theButton.id);
+            listItems();
         });
     }
 }
@@ -145,5 +147,94 @@ function addToCartErrorAlert() {
     popupModalClose.onclick = function () {
         document.getElementById('upozornenie-kosik').style.display = "none";
     }
+}
+
+async function listItems() {
+
+        let response = await fetch("?c=cart&a=getCartItems");
+
+    let messages = await response.json();
+    messages.forEach(product => {
+        const {id, cart_user_id, product_id, quantity, name} = product;
+        const productElement = document.getElementById("listOfProducts");
+        productElement.innerHTML += "<li class=\"list-group-item d-flex justify-content-between lh-sm\">\n" +
+            "                            <div class=\"col-5\">\n" +
+            "                                <h6 class=\"my-0\">${name}</h6>\n" +
+            "                            </div>\n" +
+            "                            <div class=”col-3”>\n" +
+            "                                <div class=\"quantitySetter\">\n" +
+            "                                    <div class=\"container text-center\">\n" +
+            "                                        <div class=\"row\">\n" +
+            "                                            <div class=\"col-1\">\n" +
+            "                                                <svg id=\"upi_${id}\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-plus add-quantity-button\" viewBox=\"0 0 16 16\">\n" +
+            "                                                    <path d=\"M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z\"></path>\n" +
+            "                                                    <path d=\"M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z\"></path>\n" +
+            "                                                </svg>\n" +
+            "                                            </div>\n" +
+            "                                            <div class=\"col-1\">\n" +
+            "                                                <h6 id=\"qty_<?php echo $product->getId(); ?>\" class=”count”><?php echo $product->getQuantity(); ?></h6>\n" +
+            "                                            </div>\n" +
+            "                                            <div class=\"col-1\" >\n" +
+            "                                                <svg id=\"dwn_<?php echo $product->getId(); ?>\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-minus take-quantity-button\" viewBox=\"0 0 16 16\">\n" +
+            "                                                    <path d=\"M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z\"></path>\n" +
+            "                                                    <path d=\"M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"></path>\n" +
+            "                                                </svg>\n" +
+            "                                            </div>\n" +
+            "                                        </div>\n" +
+            "                                    </div>\n" +
+            "                                </div>\n" +
+            "                            </div>\n" +
+            "                            <div class=\"col-3\" style=\"text-align: right\">\n" +
+            "                                <span id=\"prc_<?php echo $product->getId(); ?>\" class=\"text-muted\"><?=\\App\\Models\\Product::getOne( $product->getProductId())->getPrice() * $product->getQuantity()?> eur</span>\n" +
+            "                            </div>\n" +
+            "                        </li>"
+    });
+
+
+    /*
+
+            movieElement.innerHTML += `<div class="col-md-2 border rounded-4 m-1 ">\n` +
+                `        <a href="?c=movie&a=title&id=${id}&type=${type}">\n` +
+                `            <img class="image w-100 rounded-4 mt-3" src="${IMG_URL+poster_path}" alt="${nazov}">\n` +
+                `        </a>\n` +
+                `        <div class="nazov text-center text-white">\n` +
+                `            ${nazov}\n` +
+                `        </div>\n` +
+                `    </div> `;
+            `<li class="list-group-item d-flex justify-content-between lh-sm">\n` +
+
+            `<div class="col-6">`
+                ` <h6 class="my-0"><?=\App\Models\Product::getOne( $product->getProductId())->getName()?></h6>\n`
+                `</div>\n`
+                <div class=”col-4”>
+                <div class="quantitySetter">
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="col">
+                                <svg id="upi_<?php echo $product->getCartId(); ?>" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-plus add-quantity-button" viewBox="0 0 16 16">
+                                    <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"></path>
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"></path>
+                                </svg>
+                            </div>
+                            <div class="col">
+                                <h6 id="qty_<?php echo $product->getCartId(); ?>" class=”count”><?php echo $product->getQuantity(); ?></h6>
+                        </div>
+                        <div class="col" >
+                            <svg id="dwn_<?php echo $product->getCartId(); ?>" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-minus take-quantity-button" viewBox="0 0 16 16">
+                                <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"></path>
+                                <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="col" style="text-align: right">
+                <span id="prc_<?php echo $product->getCartId(); ?>" class="text-muted"><?=\App\Models\Product::getOne( $product->getProductId())->getPrice() * $product->getQuantity()?> eur</span>
+            </div>
+
+        </li>
+
+     */
 }
  window.onload = cartManipulation;

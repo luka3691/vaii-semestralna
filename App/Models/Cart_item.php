@@ -6,7 +6,7 @@ use App\Core\Model;
 
 class Cart_item extends Model
 {
-    protected $cart_id;
+    protected $id;
     protected $cart_user_id;
     protected $product_id;
     protected $quantity;
@@ -14,17 +14,17 @@ class Cart_item extends Model
     /**
      * @return mixed
      */
-    public function getCartId()
+    public function getId()
     {
-        return $this->cart_id;
+        return $this->id;
     }
 
     /**
-     * @param mixed $cart_id
+     * @param mixed $id
      */
-    public function setCartId($cart_id): void
+    public function setId($id): void
     {
-        $this->cart_id = $cart_id;
+        $this->id = $id;
     }
 
     /**

@@ -25,29 +25,30 @@ $layout = 'cart';
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">Produkty v košíku</span>
                 </h4>
-                <ul class="list-group mb-3">
-                    <div class="row">
-                        <?php foreach ($data['data'] as $product) {?>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
 
-                            <div class="col-6">
+                <ul class="list-group mb-3" id="listOfProducts">
+
+                    <?php foreach ($data['data'] as $product) {?>
+
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div class="col-5">
                                 <h6 class="my-0"><?=\App\Models\Product::getOne( $product->getProductId())->getName()?></h6>
                             </div>
-                            <div class=”col-4”>
+                            <div class=”col-3”>
                                 <div class="quantitySetter">
                                     <div class="container text-center">
                                         <div class="row">
-                                            <div class="col">
-                                                <svg id="upi_<?php echo $product->getCartId(); ?>" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-plus add-quantity-button" viewBox="0 0 16 16">
+                                            <div class="col-1">
+                                                <svg id="upi_<?php echo $product->getId(); ?>" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-plus add-quantity-button" viewBox="0 0 16 16">
                                                     <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"></path>
                                                     <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"></path>
                                                 </svg>
                                             </div>
-                                            <div class="col">
-                                                <h6 id="qty_<?php echo $product->getCartId(); ?>" class=”count”><?php echo $product->getQuantity(); ?></h6>
+                                            <div class="col-1">
+                                                <h6 id="qty_<?php echo $product->getId(); ?>" class=”count”><?php echo $product->getQuantity(); ?></h6>
                                             </div>
-                                            <div class="col" >
-                                                <svg id="dwn_<?php echo $product->getCartId(); ?>" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-minus take-quantity-button" viewBox="0 0 16 16">
+                                            <div class="col-1" >
+                                                <svg id="dwn_<?php echo $product->getId(); ?>" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-minus take-quantity-button" viewBox="0 0 16 16">
                                                     <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"></path>
                                                     <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"></path>
                                                 </svg>
@@ -56,12 +57,13 @@ $layout = 'cart';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col" style="text-align: right">
-                                <span id="prc_<?php echo $product->getCartId(); ?>" class="text-muted"><?=\App\Models\Product::getOne( $product->getProductId())->getPrice() * $product->getQuantity()?> eur</span>
+                            <div class="col-3" style="text-align: right">
+                                <span id="prc_<?php echo $product->getId(); ?>" class="text-muted"><?=\App\Models\Product::getOne( $product->getProductId())->getPrice() * $product->getQuantity()?> eur</span>
                             </div>
 
                         </li>
-                        <?php } ?>
+
+                    <?php } ?>
 
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Orientačná cena</span>
@@ -76,9 +78,6 @@ $layout = 'cart';
                                 ?> eur
                             </strong>
                         </li>
-                    </div>
-
-
 
                 </ul>
 
@@ -126,7 +125,7 @@ $layout = 'cart';
 
                         <div class="col-md-5">
                             <label for="country" class="form-label">Krajina</label>
-                            <select class="form-select" id="country" name="country" disabled readonly>
+                            <select class="form-select" id="country" name="country" disabled>
                                 <option>Slovensko</option>
                             </select>
                             <div class="invalid-feedback">
@@ -135,7 +134,7 @@ $layout = 'cart';
                         </div>
                         <div class="col-md-3">
                             <label for="zip" class="form-label">PSČ</label>
-                            <input type="text" class="form-control" id="zip" name="zip" placeholder="" required>
+                            <input type="number" class="form-control" id="zip" name="zip" placeholder="" required>
                             <div class="invalid-feedback">
                                 Zip code required.
                             </div>
