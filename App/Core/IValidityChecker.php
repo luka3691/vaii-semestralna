@@ -8,4 +8,5 @@ interface IValidityChecker
     function getParam($name): string|null ;
     function printErrorMessage($errors, $key): string;
     function newsletterEdit($errors) : bool;
+    function ordering($errors) : bool;
 }

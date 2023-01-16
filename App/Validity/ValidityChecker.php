@@ -3,6 +3,8 @@
 namespace App\Validity;
 
 use App\Core\IValidityChecker;
+use App\Models\Cart;
+use App\Models\User;
 
 class ValidityChecker implements IValidityChecker
 {
@@ -56,7 +58,7 @@ class ValidityChecker implements IValidityChecker
     function newsletterEdit($errors) : bool
     {
 
-        $errors = [];
+        //$errors = [];
         $isPost = $_SERVER['REQUEST_METHOD'] == "POST";
         if ($isPost) {
             $email = null;
@@ -116,6 +118,49 @@ class ValidityChecker implements IValidityChecker
             } else {
 
 
+            }
+        }
+        return false;
+    }
+    function ordering($errors) : bool
+    {
+        $isPost = $_SERVER['REQUEST_METHOD'] == "POST";
+        if ($isPost) {
+            //$formData = $this->app->getRequest()->getPost();
+            $users = User::getAll("email = ?", [$_SESSION['user']]);
+            $existingCart = Cart::getAll("user_id = ?", [$users[0]->getId()]);
+            //$existingProductInCart = Cart_item::getAll("cart_id = ? product_id = ?", [$existingCart[0], $formData]);
+
+
+
+            $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+
+            if (!$email) {
+                $errors['email'] = "Emailová adresa nie je platná.";
+                return false;
+            } else {
+
+                if (empty($errors)) {
+                    $order = new \App\Models\Order();
+                    $order->setFirstName($_POST['firstName']);
+                    $order->setLastName($_POST['lastName']);
+                    $order->setEmail($_POST['email']);
+                    $order->setOneaddress($_POST['address']);
+                    $order->setTwoaddress($_POST['address2']);
+                    $order->setCountry("Slovakia");
+                    $order->setZip($_POST['zip']);
+                    $order->setNote($_POST['cc-sprava']);
+                    //$order->setCartId($existingCart[0]->getId());
+                    $order->setCartId($existingCart[0]->getId());
+                    $order->save();
+                    $existingCart[0]->delete();
+                    $newCart = new Cart();
+                    $newCart->setUserId($users[0]->getId());
+                    $newCart->save();
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
         return false;

@@ -11,14 +11,33 @@ async function addedToCartAnimation() {
          timeleft -= 1;
      }, 1000);
 }
-
+function cartManipulation() {
+    addToCart();
+    editCart();
+}
+function editCart() {
+    let addQuantityButton = document.getElementsByClassName("add-quantity-button");
+    for (let i = 0; i < addQuantityButton.length; i++) {
+        let theButton = addQuantityButton[i];
+        theButton.addEventListener("click", function () {
+            cartAction("raise", theButton.id);
+        });
+    }
+    let takeQuantityButton = document.getElementsByClassName("take-quantity-button");
+    for (let i = 0; i < takeQuantityButton.length; i++) {
+        let theButton = takeQuantityButton[i];
+        theButton.addEventListener("click", function () {
+            cartAction("take", theButton.id);
+        });
+    }
+}
 function addToCart() {
     let workingCartButtons = document.getElementsByClassName("add-to-cart-working");
     for (let i = 0; i < workingCartButtons.length; i++) {
         let theButton = workingCartButtons[i];
         theButton.addEventListener("click", addedToCartAnimation);
         theButton.addEventListener("click", function () {
-                cartAction("help", theButton.id);
+                cartAction("add", theButton.id);
         });
     }
 
@@ -27,6 +46,7 @@ function addToCart() {
         let theButton = blockedCartButtons[i];
         theButton.onclick  = addToCartErrorAlert;
     }
+
 
 }
 
@@ -47,21 +67,57 @@ async function cartAction(action, product_code) {
          formBody = formBody.join("&");
 
          console.log("HEllo");
-         let response = await fetch(
-             "?c=cart&a=addToCart",
-             {
-                 headers: {
-                     'Content-Type': 'application/x-www-form-urlencoded',
-                 },
-                 method: "POST",
-                 body: formBody
-             });
+         if(action == "add") {
+             let response = await fetch(
+                 "?c=cart&a=addToCart",
+                 {
+                     headers: {
+                         'Content-Type': 'application/x-www-form-urlencoded',
+                     },
+                     method: "POST",
+                     body: formBody
+                 });
+             if (response.status != 200) {
+                 throw new Error("ERROR:" + response.status + " " + response.statusText);
+             }
+         } else if (action == "take") {
+             console.log("HEllo");
+             let response = await fetch(
+                 "?c=cart&a=takeFromCart",
+                 {
+                     headers: {
+                         'Content-Type': 'application/x-www-form-urlencoded',
+                     },
+                     method: "POST",
+                     body: formBody
+                 });
+             console.log("HEllo");
+             if (response.status != 200) {
+                 throw new Error("ERROR:" + response.status + " " + response.statusText);
+             }
+             console.log("HEllo");
+             //let messages = await response.json();
+             //let button = document.getElementsByClassName("take-quantity-button");
+         } else if (action == "raise") {
+             let response = await fetch(
+                 "?c=cart&a=raiseToCart",
+                 {
+                     headers: {
+                         'Content-Type': 'application/x-www-form-urlencoded',
+                     },
+                     method: "POST",
+                     body: formBody
+                 });
+             if (response.status != 200) {
+                 throw new Error("ERROR:" + response.status + " " + response.statusText);
+             }
+             //let messages = await response.json();
+         }
+
 
          //const data = await response.json();
          console.log(product_code);
-         if (response.status != 200) {
-             throw new Error("ERROR:" + response.status + " " + response.statusText);
-         }
+
 
      } catch (err) {
          console.log('Request Failed', err);
@@ -90,4 +146,4 @@ function addToCartErrorAlert() {
         document.getElementById('upozornenie-kosik').style.display = "none";
     }
 }
- window.onload = addToCart;
+ window.onload = cartManipulation;

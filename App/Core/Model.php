@@ -34,7 +34,6 @@ abstract class Model implements \JsonSerializable
             throw new \Exception('Query failed: ' . $e->getMessage(), 0, $e);
         }
     }
-
     /**
      * Get table name from model class name
      * @return string
