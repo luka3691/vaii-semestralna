@@ -70,14 +70,17 @@ class ValidityChecker implements IValidityChecker
 
             if (!$email) {
                 $errors['email'] = "Emailová adresa nie je platná.";
+                return false;
             } else {
 
                 if (empty($errors)) {
                     $exists = \App\Models\Newsletter::getAll("email = ?", [$email]);
                     if (count($exists) == 0) {
                         $errors['email'] = "Emailová adresa nie je v nasej datbaze.";
+                        return false;
 
                     } else {
+                        $errors['email'] = "Vpohode";
                         if (isset($_POST['submit'])) {
                             if (isset($_POST['gridCheck1']) && $_POST['gridCheck1'] == "true") {
                                 $exists[0]->setOrderUpdate(1);
@@ -95,13 +98,16 @@ class ValidityChecker implements IValidityChecker
                                 $exists[0]->setSaleAlert(0);
                             }
                             $exists[0]->save();
+                            return true;
                         } elseif (isset($_POST['delete'])) {
                             $exists[0]->delete();
+                            return true;
                         }
                     }
                 }
             }
         }
+        $errors['email'] = "Error";
         return false;
     }
     function registration($errors) : bool
@@ -114,10 +120,9 @@ class ValidityChecker implements IValidityChecker
                 return false;
             } else if (strlen($_POST['password']) < 6 || strlen($_POST['password']) > 20) {
                 $errors['password'] = "Heslo nesplna požiadavky.";
-
+                return false;
             } else {
-
-
+                return true;
             }
         }
         return false;
@@ -130,8 +135,6 @@ class ValidityChecker implements IValidityChecker
             $users = User::getAll("email = ?", [$_SESSION['user']]);
             $existingCart = Cart::getAll("user_id = ?", [$users[0]->getId()]);
             //$existingProductInCart = Cart_item::getAll("cart_id = ? product_id = ?", [$existingCart[0], $formData]);
-
-
 
             $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
 

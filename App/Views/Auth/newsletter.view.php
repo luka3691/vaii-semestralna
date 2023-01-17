@@ -7,10 +7,10 @@ $layout = 'auth';
 ?>
 <div class="container">
     <?php
-    $errors = [];
-    if ($validator->newsletterEdit($errors)) {
+    if ($data["success"]) {
         ?>
         <h5 class="card-title text-center">Zmeny boli vykonane.</h5>
+        <a class="w-100 btn btn-lg my-2" href="?c=home" role="button">Späť na domovskú stránku</a>
         <?php
     }
     else { ?>
@@ -21,14 +21,14 @@ $layout = 'auth';
                 <div class="card-body">
                     <h5 class="card-title text-center">Zadajte email pre nastavenie preferencií.</h5>
                     <div class="text-center text-danger mb-3">
-                        <?= @$data['message'] ?>
+                        <h5  style='color: red'><?=$data['email2'];?></h5>
                     </div>
                     <form class="form-signin" method="POST" action="<?= "?c=auth&a=newsletter" ?>">
                         <div class="form-label-group mb-3" >
                             <label for="emailnewsletter2" class="visually-hidden">Emailová adresa</label>
                             <input id="emailnewsletter2" name="email2" type="email" class="form-control" placeholder="Emailová adresa" value="<?=$validator->getParam("email2")?>">
                         </div>
-                        <?=$validator->printErrorMessage($errors, "email")?>
+
                         <h6>Vyberte si témy, ktoré vám budú chodiť na email.</h6>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="gridCheck1" name="gridCheck1" value="true" checked>
@@ -62,14 +62,15 @@ $layout = 'auth';
                 <div class="card-body">
                     <h5 class="card-title text-center">Zadajte email pre odhlásenie sa z newslettera.</h5>
                     <div class="text-center text-danger mb-3">
-                        <?= @$data['message'] ?>
+                        <h5  style='color: red'><?=$data['email3'];?></h5>
                     </div>
                     <form class="form-delete" method="post" action="<?= "?c=auth&a=newsletter" ?>">
                         <div class="form-label-group mb-3" >
                             <label for="emailnewsletter3" class="visually-hidden">Emailová adresa</label>
                             <input id="emailnewsletter3" name="email3" type="email" class="form-control" placeholder="Emailová adresa" value="<?=$validator->getParam("email3")?>">
+
                         </div>
-                        <?=$validator->printErrorMessage($errors, "email")?>
+
 
                         <div class="text-center">
                             <button class="btn btn-primary button-style" type="submit" name="delete" >Odhlásiť</button>
@@ -81,9 +82,8 @@ $layout = 'auth';
     </div>
     <?php } ?>
 
-    <div class="text-center"><button class="btn btn-primary button-style text-center pt-2 pb-2" onclick="window.location.href='?c=home';">
-            Vrátiť sa späť
-        </button>
+    <div class="text-center">
+        <a class="btn btn-primary btn-lg px-4 me-sm-3 show-more elegant-button" href="?c=home" role="button">Vrátiť sa späť</a>
     </div>
 
 

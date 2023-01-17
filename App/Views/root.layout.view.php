@@ -121,19 +121,19 @@
                         <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
                         <h1 class="fw-bold mb-0 fs-2">Prihláste sa do svojho zákazníckeho účtu.</h1>
 
-                        <button id="modalCloseButton" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button id="modalCloseButton1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
                     </div>
                     <h6 style="color: red; display: none; align-self: center" id="upozornenie-kosik" >Pre pridanie tovaru do košíka sa musíte prihlásiť.</h6>
                     <div class="modal-body p-5 pt-0">
                         <form class="form-signin" method="post" action="<?= \App\Config\Configuration::LOGIN_URL ?>">
                             <div class="form-floating mb-3">
-                                <input type="text" name="login" class="form-control rounded-3 text-bg-light " id="login" placeholder="name@example.com" required>
-                                <label class="text-black" for="login">Email</label>
+                                <input type="email" name="login" class="form-control rounded-3 text-bg-light " id="login1" placeholder="name@example.com" required>
+                                <label class="text-black" for="login1">Email</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input name="password" type="password" class="form-control rounded-3 text-bg-light" id="password" placeholder="Heslo" required>
-                                <label class="text-black" for="password">Heslo</label>
+                                <input name="password" type="password" class="form-control rounded-3 text-bg-light" id="password1" placeholder="Heslo" required>
+                                <label class="text-black" for="password1">Heslo</label>
                             </div>
                             <button class="w-100 mb-2 btn btn-lg elegant-button" name="submit" type="submit">Prihlásiť sa</button>
 
@@ -148,20 +148,20 @@
                     <div class="modal-header p-5 pb-4 border-bottom-0">
                         <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
                         <h1 class="fw-bold mb-0 fs-2">Zaregistrujte sa!</h1>
-                        <button id="modalCloseButton" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button id="modalCloseButton2" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
                     </div>
                     <div class="modal-body p-5 pt-0">
                         <form class="form-register" method="post" action="<?= \App\Config\Configuration::REGISTER_URL ?>">
                             <div class="form-floating mb-3">
-                                <input type="text" name="login" class="form-control rounded-3 text-bg-light " id="login" placeholder="name@example.com" required>
-                                <label class="text-black" for="login">Email</label>
+                                <input type="email" name="login" class="form-control rounded-3 text-bg-light " id="login2" placeholder="name@example.com" required>
+                                <label class="text-black" for="login2">Email</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input name="password" type="password" class="form-control rounded-3 text-bg-light" id="password" placeholder="Heslo má mať minimálne 6 a maximálne 20 znakov." required>
-                                <label class="text-black" for="password">Heslo</label>
+                                <input name="password" type="password" class="form-control rounded-3 text-bg-light" id="password2" placeholder="Heslo má mať minimálne 6 a maximálne 20 znakov." required>
+                                <label class="text-black" for="password2">Heslo v rozmedzí 6 až 20 znakov.</label>
                             </div>
-                            <button class="w-100 mb-2 btn btn-lg elegant-button" name="submit" type="submit">Prihlásiť sa</button>
+                            <button class="w-100 mb-2 btn btn-lg elegant-button" name="submit" type="submit">Zaregistrovať sa</button>
 
                         </form>
                     </div>

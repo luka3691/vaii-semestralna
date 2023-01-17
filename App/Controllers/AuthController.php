@@ -57,8 +57,26 @@ class AuthController extends AControllerBase
      */
     public function newsletter(): Response
     {
+        $errors = [];
+        $data = [];
+        $formData = $this->app->getRequest()->getPost();
+        if (isset($formData['submit'])) {
+            if ($this->app->getValidator()->newsletterEdit($errors) === false) {
+                $data = ['success' => false, 'email2' => 'Email nie je platný!', 'email3' => ''];
+            } else {
+                $data = ['success' => true, 'email2' => '', 'email3' => ''];
+            }
 
-        return $this->html();
+        } else if (isset($formData['delete'])) {
+            if ($this->app->getValidator()->newsletterEdit($errors) === false) {
+                $data = ['success' => false, 'email2' => '', 'email3' => 'Email nie je platný!'];
+            } else {
+                $data = ['success' => true, 'email2' => '', 'email3' => ''];
+            }
+        } else {
+            $data = ['success' => false, 'email2' => '', 'email3' => ''];
+        }
+        return $this->html($data);
     }
     /**
      * Register a user

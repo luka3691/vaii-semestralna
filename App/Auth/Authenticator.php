@@ -101,6 +101,12 @@ class Authenticator implements IAuthenticator
         if ($existingUser[0] !== null) {
             return false;
         }
+        $email = filter_var($email, FILTER_VALIDATE_EMAIL);
+        if (!$email) {
+            return false;
+        } elseif (strlen($password) < 6 || strlen($password) > 20){
+            return false;
+        }
 
         $tmpUser = new User();
         $tmpUser->setEmail($email);
@@ -109,7 +115,6 @@ class Authenticator implements IAuthenticator
         $tmpCart = new Cart();
         $tmpCart->setUserId($tmpUser->getId());
         $tmpCart->save();
-        //$this->createCart($email);
         return true;
     }
 
