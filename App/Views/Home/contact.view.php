@@ -21,12 +21,12 @@
     </div>
 </div>
 <div class="container col-md-6 px-5">
-    <div class="row align-items-stretch no-gutters contact-wrap">
-        <form class="row g-3">
+    <div class="row align-items-stretch no-gutters contact-wrap" id="contactFormPage">
+        <form class="row g-3" >
             <h1 class="display-6 ">Kontaktný formulár</h1>
             <div class="col-md-6">
                 <label for="inputName4" class="form-label">Meno *</label>
-                <input type="text" class="form-control" id="inputName4">
+                <input type="text" class="form-control" id="inputName4" required>
             </div>
             <div class="col-md-6">
                 <label for="inputOrganization4" class="form-label">Organizácia</label>
@@ -34,15 +34,15 @@
             </div>
             <div class="col-12">
                 <label for="inputEmail4" class="form-label">Email *</label>
-                <input type="email" class="form-control" id="inputEmail4">
+                <input type="email" class="form-control" id="inputEmail4" required>
             </div>
             <div class="col-12">
                 <label for="inputMessage2" class="form-label">Správa *</label>
-                <textarea class="form-control" id="inputMessage2" rows="3" placeholder="Sem napíšte text správy..."></textarea>
+                <textarea class="form-control" id="inputMessage2" rows="3" placeholder="Sem napíšte text správy..." required></textarea>
             </div>
 
             <div class="col-12">
-                <button type="submit" class="btn btn-primary button-style" disabled>Odoslať</button>
+                <button type="button" id="submitContact" class="btn btn-primary button-style">Odoslať</button>
             </div>
         </form>
     </div>

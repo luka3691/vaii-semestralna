@@ -13,23 +13,25 @@ $layout = 'cart';
             <div class="py-5 text-center">
                 <!--<img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
                 -->
-                <h2>Ďakujeme za otázku ohľadom cenovej ponuky.</h2>
+                <h2 class="elegant-text">Ďakujeme za otázku ohľadom cenovej ponuky.</h2>
                 <p class="lead">Budeme Vás kontaktovať na zadaný email.</p>
+                <a class="w-100 btn btn-primary btn-lg my-2 elegant-button" href="?c=home" role="button">Späť na domovskú stránku</a>
             </div>
+
             <?php
         } else { ?>
             <div class="py-5 text-center">
                 <!--<img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
                 -->
-                <h2>Formulár na žiadosť o cenovú ponuku.</h2>
+                <h2 class="elegant-text">Formulár na žiadosť o cenovú ponuku.</h2>
             </div>
 
         <div class="row g-5">
             <div class="col-md-5 col-lg-4 order-md-last">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-primary">Produkty v košíku</span>
+                    <span class="text-primary elegant-text">Produkty v košíku</span>
                 </h4>
-                <span>Orientačná cena</span>
+                <span class="elegant-text">Orientačná cena v eurách.</span>
                 <ul class="list-group mb-3" id="listOfProducts">
 
 
@@ -37,7 +39,7 @@ $layout = 'cart';
 
             </div>
             <div class="col-md-7 col-lg-8">
-                <h4 class="mb-3">Fakturačné údaje</h4>
+                <h4 class="mb-3 elegant-text">Fakturačné údaje</h4>
                 <form class="needs-validation" method="post" action="<?= "?c=cart&a=cart" ?>">
                     <div class="row g-3">
                         <div class="col-sm-6">
@@ -58,7 +60,7 @@ $layout = 'cart';
 
                         <div class="col-12">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="prosecco@prosimsi.com" required>
                             <div class="invalid-feedback">
                                 Please enter a valid email address for shipping updates.
                             </div>
@@ -66,7 +68,7 @@ $layout = 'cart';
 
                         <div class="col-12">
                             <label for="address" class="form-label">Adresa</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Bernolákova 5" required>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
@@ -74,7 +76,7 @@ $layout = 'cart';
 
                         <div class="col-12">
                             <label for="address2" class="form-label">Adresa 2 <span class="text-muted">(nepovinné)</span></label>
-                            <input type="text" class="form-control" id="address2" name="address2" placeholder="Apartment or suite">
+                            <input type="text" class="form-control" id="address2" name="address2" placeholder="Dodatočné údaje">
                         </div>
 
                         <div class="col-md-5">
@@ -97,7 +99,7 @@ $layout = 'cart';
 
                     <hr class="my-4">
 
-                    <h4 class="mb-3">Správa / Poznámka</h4>
+                    <h4 class="mb-3 elegant-text">Správa / Poznámka</h4>
                     <div class="row gy-3">
                         <div class="col-md-12">
                             <label for="cc-sprava" class="form-label">Bližšie informácie o vašej žiadosti o cenovú ponuku.</label>
