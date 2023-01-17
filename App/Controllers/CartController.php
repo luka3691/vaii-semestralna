@@ -81,7 +81,7 @@ class CartController extends AControllerBase
             //return $response;
         }
         http_response_code(204);
-
+        return new JsonResponse(0);
     }
     /**
      * Register a user
@@ -92,9 +92,7 @@ class CartController extends AControllerBase
     {
         $formData = $this->app->getRequest()->getValue("code");
         $existingProductInCart = Cart_item::getOne($formData);
-        if ($existingProductInCart == null) {
-
-        } else {
+        if ($existingProductInCart != null) {
             $tmpQuantity = $existingProductInCart->getQuantity() + 1;
 
             $existingProductInCart->setQuantity($tmpQuantity);
@@ -104,7 +102,7 @@ class CartController extends AControllerBase
 
 
         http_response_code(204);
-
+        return new JsonResponse(0);
     }
 
     /**

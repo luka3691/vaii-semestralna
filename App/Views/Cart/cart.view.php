@@ -14,7 +14,7 @@ $layout = 'cart';
                 <!--<img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
                 -->
                 <h2>Ďakujeme za otázku ohľadom cenovej ponuky.</h2>
-                <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+                <p class="lead">Budeme Vás kontaktovať na zadaný email.</p>
             </div>
             <?php
         } else { ?>
@@ -100,7 +100,7 @@ $layout = 'cart';
                     <h4 class="mb-3">Správa / Poznámka</h4>
                     <div class="row gy-3">
                         <div class="col-md-12">
-                            <label for="cc-name" class="form-label">Bližšie informácie o vašej žiadosti o cenovú ponuku.</label>
+                            <label for="cc-sprava" class="form-label">Bližšie informácie o vašej žiadosti o cenovú ponuku.</label>
                             <textarea class="form-control" id="cc-sprava" name="cc-sprava" rows="3"></textarea>
                         </div>
 
