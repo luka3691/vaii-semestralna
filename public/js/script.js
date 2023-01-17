@@ -63,7 +63,7 @@ function addToCart() {
 }
 async function contactSend() {
     try {
-        console.log(document.getElementById("inputName4").value);
+
         var details = {
             'name': document.getElementById("inputName4").value,
             'organization': document.getElementById("inputOrganization4").value,
@@ -79,7 +79,6 @@ async function contactSend() {
         }
         formBody = formBody.join("&");
 
-        console.log("HEllo");
         let response = await fetch(
                 "?c=home&a=contactSend",
                 {
@@ -110,7 +109,6 @@ async function contactSend() {
 async function cartAction(action, product_code) {
      try {
          var product = product_code.slice(4);
-         console.log(product);
          var details = {
              'code': product
          };
@@ -123,7 +121,7 @@ async function cartAction(action, product_code) {
          }
          formBody = formBody.join("&");
 
-         console.log("HEllo");
+
          if(action === "add") {
              let response = await fetch(
                  "?c=cart&a=addToCart",
@@ -138,7 +136,6 @@ async function cartAction(action, product_code) {
                  throw new Error("ERROR:" + response.status + " " + response.statusText);
              }
          } else if (action === "take") {
-             console.log("HEllo");
              let response = await fetch(
                  "?c=cart&a=takeFromCart",
                  {
@@ -148,13 +145,12 @@ async function cartAction(action, product_code) {
                      method: "POST",
                      body: formBody
                  });
-             console.log("HEllo");
              if (response.status !== 204) {
                  throw new Error("ERROR:" + response.status + " " + response.statusText);
              }
              listItems();
          } else if (action === "raise") {
-             console.log("HElloOOO");
+
              let  response = await fetch(
                  "?c=cart&a=raiseFromCart",
                  {
@@ -169,12 +165,6 @@ async function cartAction(action, product_code) {
              }
              listItems();
          }
-
-
-         //const data = await response.json();
-         console.log(product_code);
-
-
      } catch (err) {
          console.log('Request Failed', err);
      }
