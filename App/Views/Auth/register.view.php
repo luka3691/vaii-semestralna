@@ -15,7 +15,7 @@ $layout = 'auth';
                         <div class="form-label-group mb-3">
                             <input name="login" type="text" id="login" class="form-control" placeholder="Login"
                                    required autofocus>
-                            <label class="form-check-label" for="login">
+                            <label class="form-check-label" for="login" hidden>
                                 Prihlasovacie meno
                             </label>
                         </div>
@@ -23,7 +23,7 @@ $layout = 'auth';
                         <div class="form-label-group mb-3">
                             <input name="password" type="password" id="password" class="form-control"
                                    placeholder="Heslo v rozmedzí 6 až 20 znakov." required>
-                            <label class="form-check-label" for="password">
+                            <label class="form-check-label" for="password" hidden>
                                 Heslo
                             </label>
                         </div>

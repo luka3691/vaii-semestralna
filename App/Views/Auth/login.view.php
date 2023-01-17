@@ -15,7 +15,7 @@ $layout = 'auth';
                         <div class="form-label-group mb-3">
                             <input name="login" type="text" id="login" class="form-control" placeholder="Login"
                                    required autofocus>
-                            <label class="form-check-label" for="login">
+                            <label class="form-check-label" for="login" hidden>
                                 Prihlasovacie meno
                             </label>
                         </div>
@@ -23,14 +23,14 @@ $layout = 'auth';
                         <div class="form-label-group mb-3">
                             <input name="password" type="password" id="password" class="form-control"
                                    placeholder="Heslo" required>
-                            <label class="form-check-label" for="password">
+                            <label class="form-check-label" for="password" hidden>
                                 Heslo
                             </label>
                         </div>
                         <div class="text-center">
                             <button class="w-100 elegant-button" type="submit" name="submit">Prihlásiť sa
                             </button>
-                            <a class="w-100 btn btn-lg my-2" href="?c=home" role="button">Späť na domovskú stránku</a>
+                            <a class="elegant-button w-100 btn btn-lg my-2" href="?c=home" role="button">Späť na domovskú stránku</a>
                         </div>
                     </form>
                 </div>
