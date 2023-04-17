@@ -1,8 +1,12 @@
 <?php
 namespace App\Controllers;
 use App\Core\AControllerBase;
+use App\Core\Responses\JsonResponse;
 use App\Core\Responses\Response;
+use App\Models\Cart;
+use App\Models\Cart_item;
 use App\Models\Product;
+use App\Models\User;
 
 class ProductsController extends AControllerBase {
 
@@ -94,7 +98,29 @@ class ProductsController extends AControllerBase {
 
     }
 
+    public function getCategoryItems() : JsonResponse
+    {
 
+        $items = Product::getAll("category_id = ?", [$existingCart[0]->getId()]);
+
+        $data = [];
+
+        foreach ($items as $product) {
+            $data[] = [
+                'id' => $product->getId(),
+                'cart_user_id' => $product->getCartUserId(),
+                'product_id' => $product->getProductId(),
+                'quantity' => $product->getQuantity(),
+                'name' => Product::getOne($product->getProductId())->getName(),
+                'price' => Product::getOne($product->getProductId())->getPrice(),
+                'img' => Product::getOne($product->getProductId())->getImg()
+            ];
+        }
+
+        $response = new JsonResponse(array_values($data));
+        //$response->generate();
+        return $response;
+    }
 
 
 

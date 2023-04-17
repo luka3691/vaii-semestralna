@@ -23,14 +23,42 @@
 <body>
 
 <nav class="navbar navbar-expand-lg fixed-top">
+    <!-- <div class="logo-header-wrapper">
+        <div class="logo logo-header">
+            <a style="text-decoration: none" class="logo" href="?c=home" target="_self">ProseccoStore</a>
+        </div>
+    </div> -->
     <div class="container-fluid">
+        <a style="text-decoration: none" class="logo me-5" href="?c=home" target="_self">ProseccoStore</a>
+
+        <?php if ($auth->isLogged()) { ?>
+            <button type="button" class="btn btn-secondary d-lg-none ms-auto me-2" onclick="window.location.href='?c=cart&a=cart';" >
+                <div style="position: relative; justify-items: center" class="py-2 mx-1 pe-3 pb-3 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" id="cart-no-plus2" style="position: absolute">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16" id="cart-check2" color="yellow" style="position: absolute">
+                        <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"></path>
+                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+                    </svg>
+                </div>
+            </button>
+        <?php } else { ?>
+            <button type="button" class="btn btn-secondary d-lg-none ms-auto me-2">
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart mx-1 mb-1" viewBox="0 0 16 16" id="cart-no-plus-x" >
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                </svg>
+            </button>
+        <?php } ?>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="?c=products&a=prosecco">Prosecco</a>
+                    <a class="nav-link"  href="?c=products&a=prosecco">Prosecco</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="?c=products&a=wine">Víno</a>
@@ -43,45 +71,84 @@
                 </li>
             </ul>
             <div class="d-flex justify-content-center">
-                <!--
-                <form method="POST" class="d-flex" role="search">
-                    <input class="form-control me-2 flex" name="search" type="search" placeholder="Hľadanie v obchode..." aria-label="Search" value="<?=$validator->getParam("search")?>">
-                    <button class="btn button-style disabled" type="submit">Hľadať</button>
-
-                </form>
-                -->
                 <div class="text-end ps-2">
                     <?php if ($auth->isLogged()) { ?>
-
-                        <button class="btn btn-outline-primary me-2 login-button" onclick="window.location.href='?c=auth&a=logout';">
-                            Odhlásiť sa
+                        <button class="btn btn-secondary btn-outline-primary me-2 login-button" onclick="window.location.href='?c=auth&a=logout';">
+                            Odhlásenie
                         </button>
-
-
-
                     <?php } else { ?>
+                        <div class="dropdown-center">
+                            <button class="btn btn-secondary dropdown-toggle btn-outline-primary me-2 login-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Zákazícky účet
+                            </button>
+                            <form style="text-align: center;">
+                                <ul class="dropdown-menu" >
+                                    <li class="pb-1" ><input style="text-align: start" id="loginModalTrigger" type="button"  class="btn btn-outline-primary me-2 login-button align-self-center ps-2 ms-2" data-bs-target="#loginModal" data-bs-toggle="modal" value="     Prihlásiť sa    " /></li>
+                                    <li><input id="registerModalTrigger" type="button" class="btn btn-outline-primary me-2 login-button align-self-center ms-2" data-bs-target="#registerModal" data-bs-toggle="modal" value="Zaregistrovať sa" /></li>
+                                </ul>
+                            </form>
+                        </div>
+
+                        <!--
                         <form>
                             <input id="loginModalTrigger" type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal" value="Prihlásiť sa" />
                             <input id="registerModalTrigger" type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#registerModal" data-bs-toggle="modal" value="Zaregistrovať sa" />
                         </form>
+                        -->
                         <!-- <button id="loginModalTrigger" type="button" class="btn btn-outline-primary me-2 login-button" data-bs-target="#loginModal" data-bs-toggle="modal" >Prihlásiť sa</button> -->
-
                     <?php } ?>
-
                 </div>
-                <?php if ($auth->isLogged()) { ?>
-                <button type="button" class="btn btn-secondary" onclick="window.location.href='?c=cart&a=cart';">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" id="cart-no-plus" >
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16" id="cart-check" color="yellow">
-                        <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"></path>
-                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+                <input class="form-control me-2" name="search" type="search" placeholder="Vyhľadať v obchode..." aria-label="Search" value="<?=$validator->getParam("search")?>">
+                <button class="btn button-style disabled me-2" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
                 </button>
+                <!--
+                <div class="row">
+                    <div class="col-9">
+                        <input class="form-control " name="search" type="search" placeholder="Vyhľadať v obchode..." aria-label="Search" value="<?=$validator->getParam("search")?>">
+                    </div>
+                    <div class="col-3">
+                        <button class="btn button-style disabled" type="submit">Hľadať</button>
+                    </div>
+                </div>
+                -->
+                <!--
+                <div class="dropdown">
+                    <button type="button" style="background-color: cadetblue; border-color: cadetblue" class="btn btn-primary me-2" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </button>
+                    <form class="dropdown-menu dropdown-menu-end p-2" style="width: 370px" method="POST" role="search">
+                        <div class="row">
+                            <div class="col-9">
+                                <input class="form-control " name="search" type="search" placeholder="Vyhľadať v obchode..." aria-label="Search" value="<?=$validator->getParam("search")?>">
+                            </div>
+                            <div class="col-3">
+                                <button class="btn button-style disabled" type="submit">Hľadať</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                -->
+                <?php if ($auth->isLogged()) { ?>
+                    <button type="button" class="btn btn-secondary d-none d-lg-block" onclick="window.location.href='?c=cart&a=cart';">
+                        <div style="position: relative; justify-items: center" class="pb-3 mt-2 mx-1 pe-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" id="cart-no-plus" style="position: absolute">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16" id="cart-check" color="yellow" style="position: absolute">
+                                <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"></path>
+                                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+                            </svg>
+                        </div>
+
+                    </button>
                 <?php } else { ?>
-                    <button type="button" class="btn btn-secondary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" id="cart-no-plus" >
+                    <button type="button" class="btn btn-secondary d-none d-lg-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" id="cart-no-plus-x" >
                             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
                         </svg>
                     </button>
@@ -90,14 +157,9 @@
 
         </div>
 
-        <div class="logo-header-wrapper">
-            <div class="logo logo-header">
-                <a style="text-decoration: none" class="logo" href="?c=home" target="_self">ProseccoStore</a>
-            </div>
-        </div>
-
 
     </div>
+
 </nav>
 
 <div>
@@ -181,6 +243,8 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="?c=home" class="nav-link p-0 text-muted">Domov</a></li>
                     <li class="nav-item mb-2"><a href="?c=home&a=about" class="nav-link p-0 text-muted">O nás</a></li>
+                    <li class="nav-item mb-2"><a href="?c=home&a=contact" class="nav-link p-0 text-muted">Doručenie a vrátenie</a></li>
+                    <li class="nav-item mb-2"><a href="?c=home&a=contact" class="nav-link p-0 text-muted">Obchodné podmienky</a></li>
                     <li class="nav-item mb-2"><a href="?c=home&a=contact" class="nav-link p-0 text-muted">Kontakt</a></li>
                 </ul>
             </div>
@@ -191,6 +255,10 @@
                     <li class="nav-item mb-0"><div class="adresa p-0 text-muted">FILAEXIM s.r.o.</div></li>
                     <li class="nav-item mb-0"><div class="adresa p-0 text-muted">Zvolenská cesta 63/A</div></li>
                     <li class="nav-item mb-0"><div class="adresa p-0 text-muted">97405 Banská Bystrica</div></li>
+
+                </ul>
+                <h5 class="pt-2">Mobil</h5>
+                <ul class="nav flex-column">
                     <li class="nav-item mb-0"><div class="adresa p-0 text-muted">tel.: +421xxxx34850</div></li>
                 </ul>
             </div>
@@ -218,9 +286,21 @@
                 <?php } ?>
             </div>
         </div>
+        <div class="row align-self-center">
+            <div class="col flex-column align-self-center">
+                <p class="align-self-center pt-3" style="text-align: center"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-square" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                    </svg> Obsah stránky je vhodný iba pre osoby staršie ako 18 rokov. Zotrvaním na stránke potvrdzujete, že máte viac ako 18 rokov.</p>
+
+            </div>
+        </div>
 
         <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-            <p onclick=hello()>© 2022 Filaexim s.r.o.</p>
+            <div class="row">
+                <p onclick=hello()>© 2022 Filaexim s.r.o.</p>
+            </div>
+
         </div>
     </footer>
 </div>

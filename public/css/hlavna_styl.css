@@ -1,7 +1,7 @@
 .navbar {
     background: rgba(97,106,142,0.84);
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
 }
 .logo {
     font-family: "Palatino Linotype", monospace;
@@ -46,6 +46,10 @@
 }
 .adresa{
     font-family: Arial, monospace;
+}
+.nav-link{
+    !important color: #202020;
+
 }
 .nav-link:hover{
     color: silver;
@@ -117,6 +121,10 @@
     border-color: white;
     background-color: cadetblue;
 }
+.login-button.show{
+    background-color: black;
+
+}
 
 .quantitySetter{
     width: 15%;
@@ -139,4 +147,12 @@
 }
 .form-check-input:checked {
     background-color: cadetblue;
+}
+.cart-image{
+
+
+    height: 150px;
+}
+.cart-image-back{
+    width: 60px; height: 150px; overflow: hidden;
 }

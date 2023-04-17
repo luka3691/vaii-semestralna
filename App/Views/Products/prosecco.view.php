@@ -11,6 +11,12 @@ use App\Models\Product;
         Prosecco.
     </div>
 </div>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Domov</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Prosecco</li>
+    </ol>
+</nav>
 <div class="px-2 pt-2 my-5 pb-3 text-center border-bottom">
     <div class="container text-center">
         <div class="row">

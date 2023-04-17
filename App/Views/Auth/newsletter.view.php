@@ -10,7 +10,7 @@ $layout = 'auth';
     if ($data["success"]) {
         ?>
         <h5 class="card-title text-center">Zmeny boli vykonane.</h5>
-        <a class="w-100 btn btn-lg my-2" href="?c=home" role="button">Späť na domovskú stránku</a>
+        <!--<a class="w-100 btn btn-lg my-2" href="?c=home" role="button">Späť na domovskú stránku</a>-->
         <?php
     }
     else { ?>

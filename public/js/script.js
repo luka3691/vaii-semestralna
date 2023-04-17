@@ -16,6 +16,7 @@ function cartManipulation() {
         listItems();
     } else if (document.title === "ProseccoStore") {
         addToCart();
+        listCategoryItems();
     }
 
 
@@ -46,7 +47,7 @@ function addToCart() {
                 cartAction("add", theButton.id);
         });
     }
-
+    numberOfItems();
     let blockedCartButtons = document.getElementsByClassName("add-to-cart-blocked");
     for (let i = 0; i < blockedCartButtons.length; i++) {
         let theButton = blockedCartButtons[i];
@@ -175,14 +176,23 @@ async function cartAction(action, product_code) {
 function showCheckCart() {
     document.getElementById('cart-no-plus').setAttribute("height", "0");
     document.getElementById('cart-no-plus').setAttribute("width", "0");
+    document.getElementById('cart-no-plus2').setAttribute("height", "0");
+    document.getElementById('cart-no-plus2').setAttribute("width", "0");
     document.getElementById('cart-check').setAttribute("height", "16");
     document.getElementById('cart-check').setAttribute("width", "16");
+    document.getElementById('cart-check2').setAttribute("height", "16");
+    document.getElementById('cart-check2').setAttribute("width", "16");
 }
 function showNormalCart() {
     document.getElementById('cart-check').setAttribute("height", "0");
     document.getElementById('cart-check').setAttribute("width", "0");
+    document.getElementById('cart-check2').setAttribute("height", "0");
+    document.getElementById('cart-check2').setAttribute("width", "0");
     document.getElementById('cart-no-plus').setAttribute("height", "16");
     document.getElementById('cart-no-plus').setAttribute("width", "16");
+
+    document.getElementById('cart-no-plus2').setAttribute("height", "16");
+    document.getElementById('cart-no-plus2').setAttribute("width", "16");
 }
 function addToCartErrorAlert() {
     document.getElementById('upozornenie-kosik').style.display = "block";
@@ -201,9 +211,12 @@ async function listItems() {
     const productElement = document.getElementById("listOfProducts");
     productElement.innerHTML = "";
     messages.forEach(product => {
-        const {id, cart_user_id, product_id, quantity, name, price} = product;
+        const {id, cart_user_id, product_id, quantity, name, price, img} = product;
         celkovaSuma += quantity * price;
         productElement.innerHTML += '<li class="list-group-item d-flex justify-content-between lh-sm">\n' +
+            '                            <div class="col-2 cart-image-back" style="text-align: left">\n' +
+            '                               <img src="public/images/pictures/'+ img +'" class="cart-image pt-2" alt="prosecco"> \n' +
+            '                            </div>\n' +
             '                            <div class="col-6">\n' +
             '                                <h6 class="my-0 elegant-text">'+ name +'</h6>\n' +
             '                            </div>\n' +
@@ -234,6 +247,65 @@ async function listItems() {
             '                                <span id="prc_'+ id +'" class="text-muted elegant-text">'+  (price * quantity).toFixed(2) +'</span>\n' +
             '                            </div>\n' +
             '                        </li>'
+    });
+    productElement.innerHTML +=  '<li class="list-group-item d-flex justify-content-between align-self-lg-end elegant-text">\n' +
+        '                        <strong>' + celkovaSuma.toFixed(2) + ' eur</strong>\n' +
+        '                    </li>';
+    editCart();
+}
+
+async function listCategoryItems() {
+
+    let response = await fetch("?c=cart&a=getCategoryItems");
+    let messages = await response.json();
+    let celkovaSuma = 0.0;
+    const productElement = document.getElementById("categoryproducts");
+    productElement.innerHTML = "";
+    messages.forEach(product => {
+        const {id, name, img, price, description, category_id} = product;
+
+        productElement.innerHTML += '<div class="col pb-4">\n' +
+            '                                <div class="card h-100">\n' +
+            '                                    <a href="#" class="nav-link">\n' +
+            '                                        <img src="public/images/pictures/' + img + '" class="card-img-top pt-2" alt="prosecco">\n' +
+            '                                        <div class="card-body">\n' +
+            '                                            <div class="row justify-content-md-center">\n' +
+            '                                                <h5 class="card-title " >\n' +
+                                                                name +
+            '                                                </h5>\n' +
+            '                                            </div>\n' +
+            '                                            <small class="text-nowrap price">' + price +' eur</small>\n' +
+            '                                        </div>\n' +
+            '                                    </a>\n' +
+            '                                    <div class="card-footer mt-auto">\n' +
+            '                                            <button  type="button" class="btn btn-primary button-style add-to-cart-working" id="add_<?php echo $product->getId(); ?>">\n' +
+            '                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">\n' +
+            '                                                    <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"></path>\n' +
+            '                                                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>\n' +
+            '                                                </svg>\n' +
+            '                                                Pridať do košíka\n' +
+            '                                            </button>\n' +
+            '                                    </div>\n' +
+            '                                </div>\n' +
+            '                            </div>'
+    });
+    productElement.innerHTML +=  '<li class="list-group-item d-flex justify-content-between align-self-lg-end elegant-text">\n' +
+        '                        <strong>' + celkovaSuma.toFixed(2) + ' eur</strong>\n' +
+        '                    </li>';
+    editCart();
+}
+
+async function numberOfItems() {
+
+    let response = await fetch("?c=cart&a=getCartItems");
+    let messages = await response.json();
+    let pocetProduktov = 0;
+    const productElement = document.getElementById("numberOfProducts");
+    productElement.innerHTML = "";
+    messages.forEach(product => {
+        const {id, cart_user_id, product_id, quantity, name, price, img} = product;
+        pocetProduktov += quantity;
+
     });
     productElement.innerHTML +=  '<li class="list-group-item d-flex justify-content-between align-self-lg-end elegant-text">\n' +
         '                        <strong>' + celkovaSuma.toFixed(2) + ' eur</strong>\n' +

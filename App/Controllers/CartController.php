@@ -127,7 +127,8 @@ class CartController extends AControllerBase
                 'product_id' => $product->getProductId(),
                 'quantity' => $product->getQuantity(),
                 'name' => Product::getOne($product->getProductId())->getName(),
-                'price' => Product::getOne($product->getProductId())->getPrice()
+                'price' => Product::getOne($product->getProductId())->getPrice(),
+                'img' => Product::getOne($product->getProductId())->getImg()
             ];
         }
 
@@ -135,5 +136,29 @@ class CartController extends AControllerBase
         //$response->generate();
         return $response;
     }
+    public function getNumberOfCartItems() : JsonResponse
+    {
+        $users = User::getAll("email = ?", [$this->app->getAuth()->getLoggedUserName()]);
+        $existingCart = Cart::getAll("user_id = ?", [$users[0]->getId()]);
+        //$existingProductInCart = Cart_item::getAll("cart_id = ? product_id = ?", [$existingCart[0], $formData]);
+        $existingProductInCart = Cart_item::getAll("cart_user_id = ?", [$existingCart[0]->getId()]);
 
+        $data = [];
+
+        foreach ($existingProductInCart as $product) {
+            $data[] = [
+                'id' => $product->getId(),
+                'cart_user_id' => $product->getCartUserId(),
+                'product_id' => $product->getProductId(),
+                'quantity' => $product->getQuantity(),
+                'name' => Product::getOne($product->getProductId())->getName(),
+                'price' => Product::getOne($product->getProductId())->getPrice(),
+                'img' => Product::getOne($product->getProductId())->getImg()
+            ];
+        }
+
+        $response = new JsonResponse(array_values($data));
+        //$response->generate();
+        return $response;
+    }
 }
