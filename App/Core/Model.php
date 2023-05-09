@@ -85,6 +85,27 @@ abstract class Model implements \JsonSerializable
     }
 
     /**
+     * Return an array of models from DB
+     * @param string $whereClause Additional where Statement
+     * @param array $whereParams Parameters for where
+     * @return static[]
+     * @throws \Exception
+     */
+    static public function filterAll(string $whereClause = '', array $whereParams = [],  $orderBy = '', bool $typeOfSorting = true): array
+    {
+        self::connect();
+        try {
+            $sql = "SELECT * FROM `" . static::getTableName() . "`" . ($whereClause == '' ? '' : " WHERE $whereClause") . " ORDER BY price DESC";
+            $stmt = self::$connection->prepare($sql);
+            $stmt->execute($whereParams);
+            $models = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, static::class);
+            return $models;
+        } catch (PDOException $e) {
+            throw new \Exception('Query failed: ' . $e->getMessage(), 0, $e);
+        }
+    }
+
+    /**
      * Gets one model by primary key
      * @param $id
      * @return static|null

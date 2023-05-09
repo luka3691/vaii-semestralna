@@ -14,15 +14,16 @@ use App\Models\Product;
 <div class="px-2 pt-2 my-5 pb-3 text-center border-bottom">
     <div class="container text-center">
         <div class="row">
-            <div class="col-sm-2">
-                <h1 class="display-6 ">Filtre</h1>
-                <h5 class="">Tu budú filtre</h5>
-            </div>
 
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <div class="album py-5 px-2 bg-light">
                     <div class="container row row-cols-1 row-cols-md-3 g-6 px-5 pt-2">
-                        <?php foreach ($data['data'] as $product) {?>
+                        <?php if ( sizeof($data) == 0 ) {?>
+                            <h1>
+                                Neboli nájdené žiadne produkty.
+                            </h1>
+                        <?php } else { ?>
+                            <?php foreach ($data['data'] as $product) {?>
 
                             <div class="col pb-4">
                                 <div class="card h-100">
@@ -60,6 +61,7 @@ use App\Models\Product;
 
                                 </div>
                             </div>
+                        <?php } ?>
                         <?php } ?>
                     </div>
                 </div>

@@ -25,7 +25,6 @@ use App\Models\Product;
                 <div class="album py-5 px-2  bg-light">
                     <div class="container row row-cols-1 row-cols-md-3 g-6 px-5 pt-2">
                         <?php foreach ($data['data'] as $product) {?>
-
                             <div class="col pb-4">
                                 <div class="card h-100">
                                     <a href="#" class="nav-link">

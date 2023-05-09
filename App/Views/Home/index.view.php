@@ -65,7 +65,7 @@ use \App\Models\Product;
                 <div class="col pb-4">
 
                         <div class="card h-100">
-                            <a href="#" class="nav-link">
+                            <a  class="nav-link productPage"  id="productPage<?= $exists[$i]->getId() ?>"> <!--href="?c=products&a=product"-->
                             <img src="public/images/pictures/<?= $exists[$i]->getImg() ?>" class="card-img-top pt-2" alt="prosecco">
                             <div class="card-body">
                                 <div class="row justify-content-md-center">

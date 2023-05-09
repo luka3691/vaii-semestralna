@@ -39,14 +39,9 @@ class CartController extends AControllerBase
     public function addToCart() : Response
     {
         $formData = $this->app->getRequest()->getValue("code");
-        //$cisielko = $formData['code'];
-
-
         $users = User::getAll("email = ?", [$this->app->getAuth()->getLoggedUserName()]);
         $existingCart = Cart::getAll("user_id = ?", [$users[0]->getId()]);
-        //$existingProductInCart = Cart_item::getAll("cart_id = ? product_id = ?", [$existingCart[0], $formData]);
         $existingProductInCart = Cart_item::getAll("cart_user_id = ? and product_id = ?", [$existingCart[0]->getId(), $formData]);
-
 
        if (sizeof($existingProductInCart) == 0) {
            $tmpCartItem = new Cart_item();
@@ -68,17 +63,12 @@ class CartController extends AControllerBase
         $formData = $this->app->getRequest()->getValue("code");
         $existingProductInCart = Cart_item::getOne($formData);
         if ($existingProductInCart->getQuantity() == 1) {
-            //$po
-            //cetProduktov = intval($existingProductInCart[0]->getQuantity()) + 1;
             $existingProductInCart->delete();
         } else {
             $tmpQuantity = $existingProductInCart->getQuantity() - 1;
-
             $existingProductInCart->setQuantity($tmpQuantity);
             $existingProductInCart->save();
-            //$response = new JsonResponse($tmpQuantity);
             echo json_encode($tmpQuantity);
-            //return $response;
         }
         http_response_code(204);
         return new JsonResponse(0);
@@ -94,7 +84,6 @@ class CartController extends AControllerBase
         $existingProductInCart = Cart_item::getOne($formData);
         if ($existingProductInCart != null) {
             $tmpQuantity = $existingProductInCart->getQuantity() + 1;
-
             $existingProductInCart->setQuantity($tmpQuantity);
             $existingProductInCart->save();
             echo json_encode($tmpQuantity);
