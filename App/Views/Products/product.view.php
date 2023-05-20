@@ -18,9 +18,8 @@ use App\Models\Product;
         </ol>
     </nav>
     <div class="row ">
-        <div class="col-lg-6 align-content-center">
-            <img src="/public/images/pictures/Concadoro-dO-Millesimato.png"
-                 alt="Papalin 7-Rocny" class="img-fluid product-page-img">
+        <div class="col-lg-6 align-content-center" id="productImage">
+            <img src="/public/images/pictures/Concadoro-dO-Millesimato.png" alt="Papalin 7-Rocny" class="img-fluid product-page-img">
         </div>
         <div class="col-lg-6 border border-1">
             <h1 class="fw-bold" id="productName">

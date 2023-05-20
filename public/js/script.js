@@ -122,6 +122,7 @@ async function openProduct(product_code) {
                         productWindow.document.getElementById("categoryLink").innerHTML = '<a href="?c=products&a=oliveoil">Olivový olej</a>';
                         break;
                 }
+                productWindow.document.getElementById("productImage").innerHTML = '<img src="/public/images/pictures/' + img + '" alt="' + name + '" class="img-fluid product-page-img">';
                 productWindow.document.getElementById("productLinki").innerHTML = name;
                 productWindow.document.getElementById("cena").innerHTML = "€" + price + "  ";
                 productWindow.document.getElementById("placeForWorkingCart").innerHTML =

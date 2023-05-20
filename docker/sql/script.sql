@@ -1,5 +1,3 @@
-
-
 create table cart_items
 (
     id           int auto_increment
@@ -32,6 +30,15 @@ create table contacts
     organization text null,
     email        text not null,
     message      text not null
+);
+
+create table filters
+(
+    id         int auto_increment
+        primary key,
+    product_id int not null,
+    price      int null,
+    sweetness  int not null
 );
 
 create table newsletters
@@ -80,7 +87,6 @@ create table users
 );
 
 
-
 INSERT INTO ins.categories (id, name, description) VALUES (1, 'prosecco', null);
 INSERT INTO ins.categories (id, name, description) VALUES (2, 'wine', null);
 INSERT INTO ins.categories (id, name, description) VALUES (3, 'spritz', null);
@@ -96,3 +102,14 @@ INSERT INTO ins.products (id, name, img, price, description, category_id) VALUES
 INSERT INTO ins.products (id, name, img, price, description, category_id) VALUES (7, 'Perlage - Pinot grigio delle Venezie DOC', 'pinot-grigio-delle-venezie-doc-biologico-304x1200.png', 4.9, null, 2);
 INSERT INTO ins.products (id, name, img, price, description, category_id) VALUES (8, 'Olearia del Garda - Lâ€™Augusto 0,75 l', 'laugusto.png', 5.7, null, 4);
 INSERT INTO ins.products (id, name, img, price, description, category_id) VALUES (9, 'Olearia del Garda - Le Colline 0,75 l', 'colline-1240x1240.png', 5.7, null, 4);
+
+
+INSERT INTO ins.filters (id, product_id, price, sweetness) VALUES (1, 1, 1, 1);
+INSERT INTO ins.filters (id, product_id, price, sweetness) VALUES (2, 2, 2, 2);
+INSERT INTO ins.filters (id, product_id, price, sweetness) VALUES (3, 3, 2, 2);
+INSERT INTO ins.filters (id, product_id, price, sweetness) VALUES (4, 4, 2, 2);
+INSERT INTO ins.filters (id, product_id, price, sweetness) VALUES (5, 5, 1, 4);
+INSERT INTO ins.filters (id, product_id, price, sweetness) VALUES (6, 6, 3, 0);
+INSERT INTO ins.filters (id, product_id, price, sweetness) VALUES (7, 7, 1, 3);
+INSERT INTO ins.filters (id, product_id, price, sweetness) VALUES (8, 8, 2, 0);
+INSERT INTO ins.filters (id, product_id, price, sweetness) VALUES (9, 9, 2, 0);
