@@ -94,16 +94,56 @@ class ProductsController extends AControllerBase {
     public function product(): Response
     {
         $formData = $this->app->getRequest()->getPost();
-        if (isset($formData['code'])) {
-            return $this->html(['data' => Product::getAll("id = ?", [1])]);
 
+        if (isset($formData['code'])) {
+            //return $this->html(['data' => Product::getAll("id = ?", $formData['code'])]);
+            return $this->html(['data' => Product::getAll("id = ?", ["2"])]);
             //return $this->html(['data' => Product::getAll("name like %?%", [$word])]);
 
         }
         return $this->html([
-            'data' => Product::getAll("id = ?", [0])
+            'data' => Product::getAll("id = ?", ["1"])
         ]);
 
+    }
+    /**
+     * Product info
+     * @return \App\Core\Responses\JsonResponse
+     *  @throws \Exception
+     */
+    public function productInfo() : Response
+    {
+        $formData = $this->app->getRequest()->getValue("code");
+        if (!isset($formData)) {
+            $existingProduct = Product::getOne("2");
+            $data = [];
+            $data[] = [
+                'id' => $existingProduct->getId(),
+                'name' => $existingProduct->getName(),
+                'price' => $existingProduct->getPrice(),
+                'img' => $existingProduct->getImg(),
+                'desc' => $existingProduct->getDescription(),
+                'category' => $existingProduct->getCategoryId()
+            ];
+            $response = new JsonResponse(array_values($data));
+            //$response->generate();
+            return $response;
+        }
+        $existingProduct = Product::getOne($formData);
+        $data = [];
+            $data[] = [
+                'id' => $existingProduct->getId(),
+                'name' => $existingProduct->getName(),
+                'price' => $existingProduct->getPrice(),
+                'img' => $existingProduct->getImg(),
+                'desc' => $existingProduct->getDescription(),
+                'category' => $existingProduct->getCategoryId()
+            ];
+
+
+        $response = new JsonResponse(array_values($data));
+        //$response->generate();
+        return $response;
     }
 
     public function getCategoryItems() : JsonResponse

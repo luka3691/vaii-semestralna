@@ -86,10 +86,12 @@ async function openProduct(product_code) {
             var encodedValue = encodeURIComponent(details[property]);
             formBody.push(encodedKey + "=" + encodedValue);
         }
+        console.log(product);
+
         formBody = formBody.join("&");
-        window.open("?c=products&a=product");
+        var productWindow = window.open("?c=products&a=product", '_blank');
         let response = await fetch(
-            "?c=products&a=product",
+            "?c=products&a=productInfo",
             {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -97,11 +99,56 @@ async function openProduct(product_code) {
                 method: "POST",
                 body: formBody
             });
-        //window.open("?c=products&a=product");
-        if (response.status !== 204) {
+        if (response.status !== 200) {
             throw new Error("ERROR:" + response.status + " " + response.statusText);
         }
+        let messages = await response.json();
+        productWindow.addEventListener("load", function () {
+            messages.forEach(product => {
+                const {id, name, img, price, desc, category} = product;
 
+                productWindow.document.getElementById("productName").innerHTML = name;
+                switch (category){
+                    case 1:
+                        productWindow.document.getElementById("categoryLink").innerHTML = '<a href="?c=products&a=prosecco">Prosecco</a>';
+                        break;
+                    case 2:
+                        productWindow.document.getElementById("categoryLink").innerHTML = '<a href="?c=products&a=wine">Víno</a>';
+                        break;
+                    case 3:
+                        productWindow.document.getElementById("categoryLink").innerHTML = '<a href="?c=products&a=spritz">Spritz</a>';
+                        break;
+                    case 4:
+                        productWindow.document.getElementById("categoryLink").innerHTML = '<a href="?c=products&a=oliveoil">Olivový olej</a>';
+                        break;
+                }
+                productWindow.document.getElementById("productLinki").innerHTML = name;
+                productWindow.document.getElementById("cena").innerHTML = "€" + price + "  ";
+                productWindow.document.getElementById("placeForWorkingCart").innerHTML =
+                    '                            <button type="button" id="add_' + id +'" class="btn btn-primary button-style add-to-cart-working">\n' +
+                    '                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16" onclick="hello()">\n' +
+                    '                                    <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"></path>\n' +
+                    '                                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>\n' +
+                    '                                </svg>\n' +
+                    '                                Pridať do košíka\n' +
+                    '                            </button>\n' ;
+
+                productWindow.document.getElementById("placeForWorkingCart").innerHTML =
+                '                            <button type="button" class="btn btn-primary button-style add-to-cart-blocked">\n' +
+                    '                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">\n' +
+                    '                                    <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"></path>\n' +
+                    '                                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>\n' +
+                    '                                </svg>\n' +
+                    '                                Pridať do košíka\n' +
+                    '                            </button>\n';
+            });
+        })
+
+        /*
+        productWindow.onload = function () {
+            //productWindow.document.getElementById("productName").innerHTML = "name";
+
+        };*/
 
     } catch (err) {
         console.log('Request Failed', err);
@@ -311,6 +358,7 @@ async function listItems() {
 async function listCategoryItems() {
 
     var str = $( "#allfilters" ).serialize();
+    console.log(str);
     let  response = await fetch(
         "?c=products&a=getCategoryItems",
         {
@@ -320,7 +368,7 @@ async function listCategoryItems() {
             method: "POST",
             body: str
         });
-    if (response.status !== 204) {
+    if (response.status !== 200) {
         throw new Error("ERROR:" + response.status + " " + response.statusText);
     }
     let messages = await response.json();
